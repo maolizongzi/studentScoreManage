@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.cndym.entity.data.put.ClientActive" table="SYS_CLIENT_ACTIVE">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_SYS_CLIENT_ACTIVE</param>
+            </generator>
+        </id>
+        <property name="sid" column="SID" type="java.lang.String" length="20"/>
+        <property name="platform" column="PLATFORM" type="java.lang.String" length="10"/>
+        <property name="softVer" column="SOFT_VER" type="java.lang.String" length="10"/>
+        <property name="machId" column="MACH_ID" type="java.lang.String" length="100"/>
+        <property name="createTime" column="CREATE_TIME" type="java.util.Date" length="50"/>
+        <property name="updateTime" column="UPDATE_TIME" type="java.util.Date" length="50"/>
+        <property name="status" column="STATUS" type="java.lang.Integer" length="2"/>
+    </class>
+</hibernate-mapping>

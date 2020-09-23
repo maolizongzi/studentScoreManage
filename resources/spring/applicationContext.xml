@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+   	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="  
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jee 
+		http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task  
+		http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+	<!-- 1.自动扫描包扫描bean -->
+	<context:component-scan base-package="com.cndym" />
+	<!-- 0.加载数据库属性配置文件 -->
+	<context:property-placeholder location="classpath:properties/config.properties" />
+	<import resource="applicationContext-email.xml"/>
+	<!-- 配置注解 -->	
+	<!-- 2.数据库连接池c3p0配置 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="driverClass" value="${jdbc.driverClassName}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="maxPoolSize" value="40"></property>
+		<property name="minPoolSize" value="1"></property>
+		<property name="initialPoolSize" value="1"></property>
+		<property name="maxIdleTime" value="20"></property>
+	</bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 2.1 任务积分数据源 -->
+	<bean id="taskDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="jdbcUrl" value="${taskdb.url}"></property>
+		<property name="driverClass" value="${taskdb.driver}"></property>
+		<property name="user" value="${taskdb.username}"></property>
+		<property name="password" value="${taskdb.password}"></property>
+		<property name="maxPoolSize" value="40"></property>
+		<property name="minPoolSize" value="1"></property>
+		<property name="initialPoolSize" value="1"></property>
+		<property name="maxIdleTime" value="20"></property>
+	</bean>
+	<bean id="taskJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="taskDataSource" />
+    </bean>
+	<!-- 3.sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- <property name="configLocation" value="classpath:xml/hibernate.cfg.xml"/> -->
+		<!-- 自动扫描注解方式配置的hibernate类文件 -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.cndym.entity</value>
+			</list>
+		</property>
+		
+		<!--去除hibernate.cfg.xml文件，全交给Spring管理  -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${ORACLE.HIBERNATE.DIALECT}</prop>
+				<prop key="current_session_context_class">thread</prop>
+				<prop key="hibernate.jdbc.batch_size">${HIBERNATE.JDBC.BATCHSIZE}</prop>
+				<!--开启二级缓存 -->
+				<prop key="hibernate.cache.use_second_level_cache">${USE_SECOND_LEVEL_CACHE}</prop>
+				<!-- 二级缓存向导类 -->
+				<prop key="hibernate.cache.region.factory_class">${REGION.FACTORY_CLASS}</prop>
+				<!-- 缓存设置 -->
+				<prop key="cache.provider_configuration_file_resource_path">${PROVIDER_CONFIGURATION_FILE_RESOURCE_PATH}</prop>
+				<!--开启query缓存 -->
+				<prop key="cache.use_query_cache">${USE_QUERY_CACHE}</prop>
+			</props>
+		</property>
+		<property name="mappingDirectoryLocations">
+			<list><value>${HIBERNATE.BEAN.PATH}</value></list>
+		</property>
+	</bean>
+	<!-- 4.配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 5.配置事务通知属性 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

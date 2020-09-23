@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.cndym.entity.data.put.MemberLoginHistory" table="USER_MEMBER_LOGIN_HISTORY">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_USER_MEMBER_LOGIN_HISTORY</param>
+            </generator>
+        </id>
+        <property name="userCode" column="USER_CODE" type="java.lang.String" length="20"/>
+        <property name="ip" column="ip" type="java.lang.String" length="20"/>
+        <property name="sid" column="SID" type="java.lang.String" length="20"/>
+        <property name="platform" column="PLATFORM" type="java.lang.String" length="10"/>
+        <property name="softVer" column="SOFT_VER" type="java.lang.String" length="10"/>
+        <property name="mobileInfo" column="MOBILE_INFO" type="java.lang.String" length="500"/>
+        <property name="status" column="status" type="java.lang.Integer"/>
+        <property name="createTime" column="CREATE_TIME" type="java.util.Date"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.cndym.entity.data.pick.UserBettors" table="USER_BETTORS">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_USER_BETTORS</param>
+            </generator>
+        </id>
+        <property name="userCode" column="USER_CODE" type="java.lang.String" />
+        <property name="partnersCode" column="PARTNERS_CODE" type="java.lang.String" />
+        <property name="returnTime" column="RETURN_TIME" type="java.util.Date" />
+        <property name="buyType" column="BUY_TYPE" type="java.lang.Integer" />
+        <property name="orderStatus" column="ORDER_STATUS" type="java.lang.Integer" />
+        <property name="orderAmount" column="ORDER_AMOUNT" type="java.lang.Double" />
+        <property name="renGouAmount" column="RENGOU_AMOUNT" type="java.lang.Double" />
+        <property name="renGouSuccessAmount" column="RENGOU_SUCCESS_AMOUNT" type="java.lang.Double" />
+    </class>
+</hibernate-mapping>

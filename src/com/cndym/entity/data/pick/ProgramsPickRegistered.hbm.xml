@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.cndym.entity.data.pick.ProgramsPickRegistered" table="PROGRAMS_PICK_REGISTERED">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_PROGRAMS_PICK_REG</param>
+            </generator>
+        </id>
+        <property name="userCode" column="USER_CODE" type="java.lang.String" />
+        <property name="partnersCode" column="PARTNERS_CODE" type="java.lang.String" />
+        <property name="returnTime" column="RETURN_TIME" type="java.util.Date" />
+        <property name="buyType" column="BUY_TYPE" type="java.lang.Integer" />
+        <property name="orderStatus" column="ORDER_STATUS" type="java.lang.Integer" />
+        <property name="orderAmount" column="ORDER_AMOUNT" type="java.lang.Double" />
+        <property name="programsOrderId" column="PROGRAMS_ORDER_ID" type="java.lang.String" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,2 @@
+日期,积分兑换道具人数,积分兑换道具数,人均兑换数,积分抽奖道具人数,积分抽奖道具数,人均道具数,积分抽奖碎片人数,积分抽奖碎片数,人均碎片数,碎片合成道具人数,碎片合成道具数,人均合成数,奖不停活动道具人数,奖不停活动道具数,人均抽中数
+${currentDate},${buyPropPeopleCount},${buyPropPropCount},${buyPropAverageCount},${drawPropPeopleCount},${drawPropCount},${drawPropAverageCount},${drawFragPeopleCount},${drawFragCount},${drawFragAverageCount},${hechengPeopleCount},${hechengPropCount},${hechengAverageCount},${jiangbutingPeopleCont},${jiangbutingPropCount},${jiangbutingAverageCount}

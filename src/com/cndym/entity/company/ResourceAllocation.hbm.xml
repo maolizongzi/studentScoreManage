@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.cndym.entity.company.ResourceAllocation" table="RESOURCE_ALLOCATION">
+           <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_RESOURCE_ALLOCATION</param>
+            </generator>
+        </id>
+         <property name="resName"  type="java.lang.String" column="RES_NAME" length="45"/>
+         <property name="code" type="java.lang.String" column="CODE" length="45"/>
+         <property name="contacts" type="java.lang.String" column="CONTACTS" length="50" />
+         <property name="phone" type="java.lang.String" column="PHONE"  length="255"/>
+         <property name="address" type="java.lang.String" column="ADDRESS"  length="255"/>
+         <property name="mode" type="java.lang.Integer"  column="RES_MODE"  />
+         <property name="note" type="java.lang.String" column="NOTE" length="255" />
+         <property name="resType" type="java.lang.Integer" column="RES_TYPE" />
+    </class>
+</hibernate-mapping>

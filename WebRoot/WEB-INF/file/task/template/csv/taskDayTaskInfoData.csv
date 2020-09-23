@@ -1,0 +1,2 @@
+日期,今日登录,分享1次投注记录,今日成功充值10元,今日成功充值20元,今日成功充值50元,今日成功充值100元,今日成功充值200元,今日成功充值500元,今日投注满10元,今日投注满30元,今日投注满50元,今日投注满100元,今日投注满300元,今日投注满500元,今日投注满1000元,今日成功投注1次,今日成功投注5次,今日成功投注10次
+${currentDate},${login},${shareBetting1},${recharge10},${recharge20},${recharge50},${recharge100},${recharge200},${recharge500},${betting10},${betting30},${betting50},${betting100},${betting300},${betting500},${betting1000},${bettingTimes1},${bettingTimes5},${item.bettingTimes10}

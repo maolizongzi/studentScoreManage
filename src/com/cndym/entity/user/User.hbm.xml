@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.cndym.entity.user.User" table="COOPER_USER">
+        <id name="userId" column="USER_ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_USER</param>
+            </generator>
+        </id>
+        <property name="userName" column="USER_NAME" type="java.lang.String" />
+        <property name="userPassword" column="USER_PASSWORD" type="java.lang.String" />
+        <property name="realName" column="REAL_NAME" type="java.lang.String" />
+        <property name="companyCode" column="COMPANY_CODE" type="java.lang.String" />
+        <property name="userCompanyName" column="USER_COMPANY_NAME" type="java.lang.String" />
+        <property name="userDepartmentName" column="USER_DEPARTMENT_NAME" type="java.lang.String" />
+        <property name="groupId" column="GROUP_ID" type="java.lang.Long" />
+        <property name="userMobile" column="USER_MOBILE" type="java.lang.String" />
+        <property name="userEmail" column="USER_EMAIL" type="java.lang.String" />
+        <property name="userCode" column="USER_Code" type="java.lang.String" />
+        <property name="createTime" column="CREATE_TIME" type="java.util.Date" />
+        <property name="editTime" column="EDIT_TIME" type="java.util.Date" />
+    </class>
+</hibernate-mapping>

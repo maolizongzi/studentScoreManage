@@ -1,0 +1,2 @@
+日期,总人数,积分总数,人均产生积分,消耗人数,消耗总数,人均消耗积分,当天登录用户,当天积分存量,积分总存量
+${currentDate},${makeScorePeopleCount},${makeScoreTotalScore},${makeScoreAverageScore},${costScorePeopleCount},${costScoreTotalScore},${costScoreAverageScore},${loginScoreTotalScore},${changeScore},${totalScoreInPool}

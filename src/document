@@ -1,0 +1,57 @@
+配置路径
+http://www.tuicool.com/articles/FRVVNf
+
+
+
+重要的sql
+
+//当前时间的前一天  00：00
+select    to_char(trunc(sysdate -1), 'yyyy-mm-dd  hh24:mi:ss') from dual;
+
+//当前时间的前一天 23:59:59
+select    to_char((trunc(sysdate))-1/(24*60*60), 'yyyy-mm-dd  hh24:mi:ss') from dual;
+
+
+
+//创建序列
+
+
+-- Create sequence 
+create sequence SEQ_COOPERATION_SALE_TABLE
+minvalue 1
+maxvalue 999999999999999
+start with 1
+increment by 1
+cache 20;
+
+
+
+1: 总充值金额  / 新用户充值金额
+用的是充值金额 还是 实到金额？
+现在算的是实到金额
+com.cndym.dao.put.impl.FillDaoImpl.queryAllMoney()
+com.cndym.dao.put.impl.FillDaoImpl.queryNewMonery()
+
+
+
+2: 充值新用户数：
+select *  from  USER_FILL_PICK   f  INNER JOIN    user_member_pick  m  ON   f.user_code =  m.user_code   ; 
+充值表里面有sid  ，  关联注册表， 注册表里面有sid   
+我应该用哪个sid？？？  现在用的是 注册表里面的sid
+com.cndym.dao.put.impl.FillDaoImpl.queryNewDistinct()
+
+
+
+//先都按照登陆写
+
+
+
+
+
+
+
+
+
+
+
+
