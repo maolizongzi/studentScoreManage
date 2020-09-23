@@ -1,0 +1,2 @@
+# studentScoreManage
+student score manage
