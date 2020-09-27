@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.4.RELEASE</version>
+    </parent>
+
+    <groupId>org.graduate</groupId>
+    <artifactId>student-score-manage</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>student-repository</module>
+        <module>classes-repository</module>
+        <module>subject-service</module>
+        <module>subject-repository</module>
+        <module>teacher-repository</module>
+        <module>teacher-service</module>
+        <module>teacher-controller</module>
+        <module>student-controller</module>
+        <module>student-score-manage-application</module>
+        <module>student-service</module>
+        <module>classes-service</module>
+    </modules>
+
+
+</project>

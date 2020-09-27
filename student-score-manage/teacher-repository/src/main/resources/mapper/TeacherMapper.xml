@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.graduate.teacher.repository.dao.TeacherDao">
+
+    <insert id="save" parameterType="org.graduate.teacher.repository.model.Teacher">
+        <trim suffix="INSERT INTO ssm_teacher (" prefix=")" prefixOverrides=",">
+            <if test="no != null">no,</if>
+            <if test="name != null">name,</if>
+            <if test="password != null">password,</if>
+            <if test="gender != null">gender,</if>
+            <if test="telephone">telephone</if>
+            <if test="admissionDate">admission_date,</if>
+            <if test="resignDate">resign_date,</if>
+            <if test="status">status,</if>
+        </trim>
+        <trim suffix="VALUES (" prefix=")" prefixOverrides=",">
+            <if test="no != null">#{no},</if>
+            <if test="name != null">#{name}</if>
+            <if test="password != null">#{password}</if>
+            <if test="gender != null">#{gender}</if>
+            <if test="telephone">#{telephone}</if>
+            <if test="admissionDate">#{admissionDate}</if>
+            <if test="resignDate">#{resignDate}</if>
+            <if test="status">#{status}</if>
+        </trim>
+    </insert>
+
+</mapper>
