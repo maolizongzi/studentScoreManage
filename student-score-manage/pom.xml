@@ -25,6 +25,9 @@
         <module>student-score-manage-application</module>
         <module>student-service</module>
         <module>classes-service</module>
+        <module>role-service</module>
+        <module>role-repository</module>
+        <module>role-repository</module>
     </modules>
 
 
