@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.role.repository.dao.RoleDao">
     <insert id="save" parameterType="org.graduate.role.repository.model.Role">
-        <trim suffix="INSERT INTO ssm_permissions (" prefix=")" prefixOverrides=",">
+        <trim prefix="INSERT INTO ssm_permissions (" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
         </trim>
-        <trim suffix="VALUES (" prefix=")" prefixOverrides=",">
-            <if test="name != null">#{name}</if>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
         </trim>
     </insert>
 </mapper>

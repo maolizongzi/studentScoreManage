@@ -1,8 +1,8 @@
-package org.graduate.teacher.repository.model;
+package org.graduate.teacher.service.entity;
 
 import java.util.Date;
 
-public class Teacher {
+public class TeacherEntity {
     private Long id;
     private String no;
     private String name;

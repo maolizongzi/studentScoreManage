@@ -3,11 +3,11 @@
 <mapper namespace="org.graduate.subject.repository.dao.ExamDao">
 
     <insert id="save" parameterType="org.graduate.subject.repository.model.Exam">
-        <trim suffix="INSERT INTO ssm_teacher (" prefix=")" prefixOverrides=",">
+        <trim prefix="INSERT INTO ssm_teacher (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
             <if test="name != null">name,</if>
         </trim>
-        <trim suffix="VALUES (" prefix=")" prefixOverrides=",">
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="no != null">#{no},</if>
             <if test="name != null">#{name}</if>
         </trim>

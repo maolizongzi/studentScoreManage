@@ -3,8 +3,7 @@
 <mapper namespace="org.graduate.student.repository.dao.ExamScoreDao">
 
     <insert id="save" parameterType="org.graduate.student.repository.model.ExamScore">
-        (`student_id`, `student_no`, `student_name`, `subject_id`, `subject_no`, `subject_name`, `exam_id`, `exam_no`, `exam_name`, `exam_score`, `exam_date`, `classes_id`, `classes_no`) VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
-        <trim suffix="INSERT INTO ssm_exam_score (" prefix=")" prefixOverrides=",">
+        <trim prefix="INSERT INTO ssm_exam_score (" suffix=")" suffixOverrides=",">
             <if test="studentId != null">student_id,</if>
             <if test="studentNo != null">student_no,</if>
             <if test="studentName != null">student_name,</if>
@@ -19,7 +18,7 @@
             <if test="classesId != null">classes_id,</if>
             <if test="classesNo != null">classes_no,</if>
         </trim>
-        <trim suffix="VALUES (" prefix=")" prefixOverrides=",">
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="studentId != null">#{studentId},</if>
             <if test="studentNo != null">#{studentNo},</if>
             <if test="studentName != null">#{studentName},</if>

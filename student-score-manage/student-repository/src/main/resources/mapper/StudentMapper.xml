@@ -3,7 +3,7 @@
 <mapper namespace="org.graduate.student.repository.dao.StudentDao">
 
     <insert id="save" parameterType="org.graduate.student.repository.model.Student">
-        <trim suffix="INSERT INTO ssm_student (" prefix=")" prefixOverrides=",">
+        <trim prefix="INSERT INTO ssm_student (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
             <if test="name != null">name,</if>
             <if test="gender != null">gender,</if>
@@ -16,7 +16,7 @@
             <if test="status != null">status,</if>
             <if test="classesId != null">classes_id,</if>
         </trim>
-        <trim suffix="VALUES (" prefix=")" prefixOverrides=",">
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="no != null">#{no},</if>
             <if test="name != null">#{name},</if>
             <if test="gender != null">#{gender},</if>

@@ -27,7 +27,7 @@
         <module>classes-service</module>
         <module>role-service</module>
         <module>role-repository</module>
-        <module>role-repository</module>
+        <module>base-general</module>
     </modules>
 
 
