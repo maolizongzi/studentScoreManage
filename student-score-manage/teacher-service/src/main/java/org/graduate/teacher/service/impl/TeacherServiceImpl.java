@@ -6,8 +6,6 @@ import org.graduate.teacher.repository.model.Teacher;
 import org.graduate.teacher.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.BadPaddingException;

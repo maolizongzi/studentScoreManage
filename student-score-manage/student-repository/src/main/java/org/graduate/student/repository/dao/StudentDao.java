@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentDao {
     void save(Student student);
+
+    void update(Student student);
 }

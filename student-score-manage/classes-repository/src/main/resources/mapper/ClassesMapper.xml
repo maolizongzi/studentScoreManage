@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.classes.repository.dao.ClassesDao">
 
-    <insert id="save" parameterType="org.graduate.classes.repository.model.Classes">
+    <insert id="save" parameterType="org.graduate.classes.repository.model.Classes" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <trim prefix="INSERT INTO ssm_classes (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
             <if test="name != null">name,</if>
