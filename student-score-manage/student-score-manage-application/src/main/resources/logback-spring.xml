@@ -5,12 +5,12 @@
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p ${PID:-} [%15.15t] %-40.40logger{39} : %m%n</pattern>
         </encoder>
     </appender>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>app.log</file>
-        <encoder>
-            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
-        </encoder>
-    </appender>
+<!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+<!--        <file>app.log</file>-->
+<!--        <encoder>-->
+<!--            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
 <!--        <appender-ref ref="FILE"/>-->

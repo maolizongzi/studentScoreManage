@@ -1,8 +1,8 @@
-package org.graduate.student.repository.model;
+package org.graduate.student.service.entity;
 
 import java.util.Date;
 
-public class ExamScore {
+public class ExamScoreEntity {
     private Long id;
     private Long studentId;
     private String studentNo;
