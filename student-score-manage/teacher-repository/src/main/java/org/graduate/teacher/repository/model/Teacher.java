@@ -7,7 +7,7 @@ public class Teacher {
     private String no;
     private String name;
     private String password;
-    private String gender;
+    private Integer gender;
     private String telephone;
     private Date admissionDate;
     private Date resignDate;
@@ -45,11 +45,11 @@ public class Teacher {
         this.password = password;
     }
 
-    public String getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 

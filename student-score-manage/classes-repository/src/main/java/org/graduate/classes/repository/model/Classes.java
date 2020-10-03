@@ -1,16 +1,16 @@
 package org.graduate.classes.repository.model;
 
 public class Classes {
-    private long id;
+    private Long id;
     private String no;
     private String name;
     private int grade;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -2,27 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.teacher.repository.dao.TeacherDao">
 
-    <insert id="save" parameterType="org.graduate.teacher.repository.model.Teacher">
-        <trim suffix="INSERT INTO ssm_teacher (" prefix=")" prefixOverrides=",">
+    <insert id="save" parameterType="org.graduate.teacher.repository.model.Teacher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        <trim prefix="INSERT INTO ssm_teacher (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
             <if test="name != null">name,</if>
             <if test="password != null">password,</if>
             <if test="gender != null">gender,</if>
-            <if test="telephone">telephone</if>
+            <if test="telephone">telephone,</if>
             <if test="admissionDate">admission_date,</if>
             <if test="resignDate">resign_date,</if>
             <if test="status">status,</if>
         </trim>
-        <trim suffix="VALUES (" prefix=")" prefixOverrides=",">
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="no != null">#{no},</if>
-            <if test="name != null">#{name}</if>
-            <if test="password != null">#{password}</if>
-            <if test="gender != null">#{gender}</if>
-            <if test="telephone">#{telephone}</if>
-            <if test="admissionDate">#{admissionDate}</if>
-            <if test="resignDate">#{resignDate}</if>
-            <if test="status">#{status}</if>
+            <if test="name != null">#{name},</if>
+            <if test="password != null">#{password},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="telephone">#{telephone},</if>
+            <if test="admissionDate">#{admissionDate},</if>
+            <if test="resignDate">#{resignDate},</if>
+            <if test="status">#{status},</if>
         </trim>
     </insert>
+
+    <update id="update" parameterType="org.graduate.teacher.repository.model.Teacher">
+        UPDATE ssm_teacher
+        <set>
+            <if test="no != null">no = #{no},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="telephone">telephone = #{telephone},</if>
+            <if test="admissionDate">admission_date = #{admissionDate},</if>
+            <if test="resignDate">resign_date = #{resignDate},</if>
+            <if test="status">status = #{status},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
 
 </mapper>

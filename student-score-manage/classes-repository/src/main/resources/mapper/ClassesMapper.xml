@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.classes.repository.dao.ClassesDao">
 
-    <insert id="save" parameterType="org.graduate.classes.repository.model.Classes">
-        <trim suffix="INSERT INTO ssm_classes (" prefix=")" prefixOverrides=",">
+    <insert id="save" parameterType="org.graduate.classes.repository.model.Classes" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        <trim prefix="INSERT INTO ssm_classes (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
             <if test="name != null">name,</if>
             <if test="grade != null">grade,</if>
         </trim>
-        <trim suffix="VALUES (" prefix=")" prefixOverrides=",">
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="no != null">#{no},</if>
             <if test="name != null">#{name},</if>
             <if test="grade != null">#{grade},</if>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.graduate.student.repository.dao.StudentDao">
+
+    <insert id="save" parameterType="org.graduate.student.repository.model.Student" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        <trim prefix="INSERT INTO ssm_student (" suffix=")" suffixOverrides=",">
+            <if test="no != null">no,</if>
+            <if test="name != null">name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="password != null">password,</if>
+            <if test="identityNo != null">identity_no,</if>
+            <if test="address != null">address,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="admissionDate != null">admission_date,</if>
+            <if test="graduationDate != null">graduation_date,</if>
+            <if test="status != null">status,</if>
+            <if test="classesId != null">classes_id,</if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="no != null">#{no},</if>
+            <if test="name != null">#{name},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="password != null">#{password},</if>
+            <if test="identityNo != null">#{identityNo},</if>
+            <if test="address != null">#{address},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="admissionDate != null">#{admissionDate},</if>
+            <if test="graduationDate != null">#{graduationDate},</if>
+            <if test="status != null">#{status},</if>
+            <if test="classesId != null">#{classesId},</if>
+        </trim>
+    </insert>
+    
+    <update id="update" parameterType="org.graduate.student.repository.model.Student">
+        UPDATE ssm_student
+        <set>
+            <if test="no != null">no = #{no},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="identityNo != null">identity_no = #{identityNo},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="classes_id != null">classes_id = #{classesId},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="admission_date != null">admission_date = #{admissionDate},</if>
+            <if test="graduation_date != null">graduation_date = #{graduationDate},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+</mapper>

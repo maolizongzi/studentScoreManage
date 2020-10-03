@@ -5,4 +5,13 @@ spring:
   datasource:
     username: root
     password: 12345678
-    url: mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/studentScoreManage?useUnicode=true&characterEncoding=utf-8&useSSL=true
+
+graduate:
+  password:
+    key: 123456789
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+logging:
+  config: classpath:logback-spring.xml
