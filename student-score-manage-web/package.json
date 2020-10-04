@@ -4,12 +4,10 @@
   "lockfileVersion": 1,
   "requires": true,
   "scripts": {
-    "start": "npm bin/bin.js"
+    "start": "node bin/bin.js"
   },
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "feather-icons": "^4.28.0"
-  }
+  "dependencies": {}
 }
