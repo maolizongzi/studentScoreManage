@@ -1,0 +1,15 @@
+{
+  "name": "student-score-mange-web",
+  "version": "0.1.0",
+  "lockfileVersion": 1,
+  "requires": true,
+  "scripts": {
+    "start": "npm bin/bin.js"
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "feather-icons": "^4.28.0"
+  }
+}
