@@ -4,6 +4,7 @@ import org.graduate.teacher.controller.utility.TeacherUtil;
 import org.graduate.teacher.repository.model.Teacher;
 import org.graduate.teacher.service.TeacherService;
 import org.graduate.teacher.service.entity.TeacherEntity;
+import org.graduate.teacher.service.entity.TeacherLoginEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +25,13 @@ public class TeacherController {
     }
 
     @PostMapping("login")
-    public String login() {
-        return "";
+    public TeacherLoginEntity login(@RequestBody TeacherEntity teacherEntity) {
+        return teacherService.loginByTeacherNo(teacherEntity.getNo(), teacherEntity.getPassword());
     }
 
     @PostMapping("register")
     public TeacherEntity register(@RequestBody TeacherEntity teacherEntity) {
-        Teacher teacher = TeacherUtil.toTeacher(teacherEntity);
-        teacherService.addTeacher(teacher);
-        return TeacherUtil.toTeacherEntity(teacher);
+        teacherService.addTeacher(teacherEntity);
+        return teacherEntity;
     }
 }
