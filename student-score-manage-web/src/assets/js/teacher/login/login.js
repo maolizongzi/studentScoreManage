@@ -18,15 +18,12 @@
                 type: 'post',
                 async: false,
                 contentType: 'application/json',
-                context: { 'no': no, 'password': password },
+                data: JSON.stringify({ 'no': no, 'password': password }),
                 success: function (result) {
-                    window.location.href = "/layouts/layout.html"
                     var code = result['code'];
                     var data = result['data'];
                     if (code === '00') {
-                        window.location.href = "/layouts/layout.html"
-                    } else {
-
+                        window.location.href = "/src/layouts/layout.html"
                     }
                 },
                 error: function (err) {

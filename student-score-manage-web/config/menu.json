@@ -1,0 +1,28 @@
+{
+    "menu-item-data": [
+        {
+            "name": "学生管理",
+            "path": "/src/pages/student/list.html",
+            "icon": "align-justify",
+            "authority": ""
+        },
+        {
+            "name": "教师管理",
+            "path": "",
+            "icon": "",
+            "authority": ""
+        },
+        {
+            "name": "班级管理",
+            "path": "",
+            "icon": "",
+            "authority": ""
+        },
+        {
+            "name": "课程管理",
+            "path": "",
+            "icon": "",
+            "authority": ""
+        }
+    ]
+}
