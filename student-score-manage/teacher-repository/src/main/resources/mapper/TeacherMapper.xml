@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.teacher.repository.dao.TeacherDao">
 
-    <insert id="save" parameterType="org.graduate.teacher.repository.model.Teacher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="save" parameterType="org.graduate.teacher.repository.model.Teacher" useGeneratedKeys="true"
+            keyProperty="id" keyColumn="id">
         <trim prefix="INSERT INTO ssm_teacher (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
             <if test="name != null">name,</if>
@@ -39,5 +40,9 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <select id="queryByNo" resultType="org.graduate.teacher.repository.model.Teacher">
+        SELECT * FROM ssm_teacher WHERE no = #{no}
+    </select>
 
 </mapper>
