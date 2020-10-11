@@ -1,8 +1,13 @@
 package org.graduate.student.service;
 
-import org.graduate.student.repository.model.Student;
+import org.graduate.base.general.entity.QueryResultEntity;
+import org.graduate.student.repository.model.StudentQueryParam;
+import org.graduate.student.service.entity.StudentEntity;
+
+import java.util.List;
 
 public interface StudentService {
 
-    void addStudent(Student student);
+    StudentEntity addStudent(StudentEntity student);
+    QueryResultEntity<List<StudentEntity>> query(StudentQueryParam studentQueryParam);
 }

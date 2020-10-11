@@ -1,8 +1,14 @@
 package org.graduate.subject.service;
 
-import org.graduate.subject.repository.model.Subject;
+import org.graduate.base.general.entity.QueryResultEntity;
+import org.graduate.subject.repository.model.SubjectQueryParam;
+import org.graduate.subject.service.entity.SubjectEntity;
+
+import java.util.List;
 
 public interface SubjectService {
 
-    void addSubject(Subject subject);
+    SubjectEntity addSubject(SubjectEntity subjectEntity);
+
+    QueryResultEntity<List<SubjectEntity>> query(SubjectQueryParam subjectQueryParam);
 }

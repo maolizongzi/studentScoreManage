@@ -1,4 +1,4 @@
-package org.graduate.teacher.controller.utility;
+package org.graduate.classes.service.utility;
 
 import org.graduate.classes.repository.model.Classes;
 import org.graduate.classes.service.entity.ClassesEntity;

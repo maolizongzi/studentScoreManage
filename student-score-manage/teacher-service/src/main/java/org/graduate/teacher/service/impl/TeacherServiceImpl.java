@@ -1,8 +1,10 @@
 package org.graduate.teacher.service.impl;
 
+import org.graduate.base.general.entity.QueryResultEntity;
 import org.graduate.base.general.utility.AESUtil;
 import org.graduate.teacher.repository.dao.TeacherDao;
 import org.graduate.teacher.repository.model.Teacher;
+import org.graduate.teacher.repository.model.TeacherQueryParam;
 import org.graduate.teacher.service.TeacherService;
 import org.graduate.teacher.service.entity.TeacherEntity;
 import org.graduate.teacher.service.entity.TeacherLoginEntity;
@@ -17,7 +19,9 @@ import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -33,7 +37,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void addTeacher(TeacherEntity teacherEntity) {
+    public TeacherEntity addTeacher(TeacherEntity teacherEntity) {
         Teacher teacher = TeacherUtil.toTeacher(teacherEntity);
         try {
             teacher.setPassword(AESUtil.encrypt(passwordKey, teacher.getTelephone()));
@@ -43,6 +47,7 @@ public class TeacherServiceImpl implements TeacherService {
         teacherDao.save(teacher);
         teacher.setNo(buildTeacherNo(teacher.getId(), teacher.getAdmissionDate()));
         teacherDao.update(teacher);
+        return TeacherUtil.toTeacherEntity(teacher);
     }
 
     @Override
@@ -62,11 +67,24 @@ public class TeacherServiceImpl implements TeacherService {
             teacherLoginEntity.setCode("00");
             teacherLoginEntity.setResult("success");
             TeacherEntity teacherEntity = TeacherUtil.toTeacherEntity(teacher);
-            teacherLoginEntity.setTeacherEntity(teacherEntity);
+            teacherLoginEntity.setData(teacherEntity);
         }
-
-
         return teacherLoginEntity;
+    }
+
+    @Override
+    public QueryResultEntity<List<TeacherEntity>> query(TeacherQueryParam teacherQueryParam) {
+        List<Teacher> teachers = teacherDao.query(teacherQueryParam);
+        Integer count = teacherDao.queryCount(teacherQueryParam);
+
+        List<TeacherEntity> teacherEntities = new ArrayList<>();
+        teachers.forEach(o -> teacherEntities.add(TeacherUtil.toTeacherEntity(o)));
+
+        QueryResultEntity<List<TeacherEntity>> queryResultEntity = new QueryResultEntity<>(teacherQueryParam.getPageSize(), count);
+        queryResultEntity.setData(teacherEntities);
+        queryResultEntity.setCode("00");
+        queryResultEntity.setResult("success");
+        return queryResultEntity;
     }
 
 

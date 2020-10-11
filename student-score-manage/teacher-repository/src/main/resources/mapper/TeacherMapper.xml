@@ -2,27 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.teacher.repository.dao.TeacherDao">
 
-    <insert id="save" parameterType="org.graduate.teacher.repository.model.Teacher" useGeneratedKeys="true"
-            keyProperty="id" keyColumn="id">
+    <resultMap id="baseResultMap" type="org.graduate.teacher.repository.model.Teacher">
+        <id property="id" column="id"/>
+        <result property="no" column="no"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="gender" column="gender"/>
+        <result property="telephone" column="telephone"/>
+        <result property="admissionDate" column="admission_date"/>
+        <result property="resignDate" column="resign_date"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <insert id="save" parameterType="org.graduate.teacher.repository.model.Teacher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <trim prefix="INSERT INTO ssm_teacher (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
             <if test="name != null">name,</if>
             <if test="password != null">password,</if>
             <if test="gender != null">gender,</if>
-            <if test="telephone">telephone,</if>
-            <if test="admissionDate">admission_date,</if>
-            <if test="resignDate">resign_date,</if>
-            <if test="status">status,</if>
+            <if test="telephone != null">telephone,</if>
+            <if test="admissionDate != null">admission_date,</if>
+            <if test="resignDate != null">resign_date,</if>
+            <if test="status != null">status,</if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="no != null">#{no},</if>
             <if test="name != null">#{name},</if>
             <if test="password != null">#{password},</if>
             <if test="gender != null">#{gender},</if>
-            <if test="telephone">#{telephone},</if>
-            <if test="admissionDate">#{admissionDate},</if>
-            <if test="resignDate">#{resignDate},</if>
-            <if test="status">#{status},</if>
+            <if test="telephone != null">#{telephone},</if>
+            <if test="admissionDate != null">#{admissionDate},</if>
+            <if test="resignDate != null">#{resignDate},</if>
+            <if test="status != null">#{status},</if>
         </trim>
     </insert>
 
@@ -34,15 +45,23 @@
             <if test="password != null">password = #{password},</if>
             <if test="gender != null">gender = #{gender},</if>
             <if test="telephone">telephone = #{telephone},</if>
-            <if test="admissionDate">admission_date = #{admissionDate},</if>
-            <if test="resignDate">resign_date = #{resignDate},</if>
-            <if test="status">status = #{status},</if>
+            <if test="admissionDate != null">admission_date = #{admissionDate},</if>
+            <if test="resignDate != null">resign_date = #{resignDate},</if>
+            <if test="status != null">status = #{status},</if>
         </set>
         WHERE id = #{id}
     </update>
 
     <select id="queryByNo" resultType="org.graduate.teacher.repository.model.Teacher">
         SELECT * FROM ssm_teacher WHERE no = #{no}
+    </select>
+
+    <select id="query" parameterType="org.graduate.teacher.repository.model.TeacherQueryParam" resultMap="baseResultMap">
+        SELECT COUNT(*) FROM ssm_teacher
+    </select>
+
+    <select id="queryCount" parameterType="org.graduate.teacher.repository.model.TeacherQueryParam" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM ssm_teacher
     </select>
 
 </mapper>

@@ -9,7 +9,7 @@
         success: function (result) {
             serverUrl = result['server-url'];
         }
-    })).then(
+    })).done(
         $.ajax({
             type: 'get',
             url: '/config/menu.json',
@@ -17,13 +17,13 @@
             success: function (menuContent) {
                 menu = menuContent['menu-item-data'];
                 var ul = $('<ul></ul>');
-                ul.attr({ class: "nav flex-column mb-2" });
+                ul.attr({ class: 'nav flex-column mb-2' });
                 $.each(menu, function (index, obj) {
                     var li = $('<li></li>');
                     li.attr({ class: 'nav-item' });
                     var a = $('<a></a>');
                     a.text(obj['name']);
-                    a.attr({ class: 'nav-link', href: obj['path'] });
+                    a.attr({ class: 'nav-link' });
                     var span = $('<span></span>');
                     if (obj['icon']) {
                         span.attr({ 'data-feather': obj['icon'] });
@@ -32,6 +32,13 @@
                     li.append(a);
                     ul.append(li);
                     $('#menuBar').append(ul);
+                    li.on('click', function () {
+                        $('#page-title').text();
+                        $('#page-title').text(obj['name']);
+                        $('#content').empty();
+                        $('#content').load(obj['path']);
+                        console.log('load');
+                    });
                 });
                 feather.replace();
             }
