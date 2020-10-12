@@ -1,8 +1,9 @@
 package org.graduate.student.repository.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Student {
+public class Student implements Serializable {
     private Long id;
     private String no;
     private Integer gender;

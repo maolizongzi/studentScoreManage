@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.student.repository.dao.StudentDao">
 
+    <resultMap id="baseResultMap" type="org.graduate.student.repository.model.Student">
+        <id column="id" property="id"/>
+        <result column="no" property="no"/>
+        <result column="gender" property="gender"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="identity" property="identityNo"/>
+        <result column="address" property="address"/>
+        <result column="birthday" property="birthday"/>
+        <result column="admission_date" property="admissionDate"/>
+        <result column="graduation_date" property="graduationDate"/>
+        <result column="status" property="status"/>
+        <result column="classes_id" property="classesId"/>
+    </resultMap>
+
     <insert id="save" parameterType="org.graduate.student.repository.model.Student" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <trim prefix="INSERT INTO ssm_student (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
@@ -30,7 +45,7 @@
             <if test="classesId != null">#{classesId},</if>
         </trim>
     </insert>
-    
+
     <update id="update" parameterType="org.graduate.student.repository.model.Student">
         UPDATE ssm_student
         <set>
@@ -48,5 +63,13 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <select id="query" parameterType="org.graduate.student.repository.model.StudentQueryParam" resultMap="baseResultMap">
+        SELECT * FROM ssm_student
+
+    </select>
+    <select id="queryCount" parameterType="org.graduate.student.repository.model.StudentQueryParam" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM ssm_student
+    </select>
 
 </mapper>

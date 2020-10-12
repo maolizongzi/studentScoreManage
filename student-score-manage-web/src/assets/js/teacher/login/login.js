@@ -9,7 +9,7 @@
         success: function (result) {
             serverUrl = result['server-url'];
         }
-    })).then(function () {
+    })).done(function () {
         $('#sign-in').click(function () {
             var no = $('#inputNo').val();
             var password = $('#inputPassword').val();

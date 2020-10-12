@@ -1,14 +1,13 @@
 package org.graduate.teacher.controller;
 
-import org.graduate.subject.repository.model.Subject;
+import org.graduate.base.general.entity.QueryResultEntity;
+import org.graduate.subject.repository.model.SubjectQueryParam;
 import org.graduate.subject.service.SubjectService;
 import org.graduate.subject.service.entity.SubjectEntity;
-import org.graduate.teacher.controller.utility.SubjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("subject")
@@ -24,8 +23,17 @@ public class SubjectController {
 
     @PostMapping("add")
     public SubjectEntity addSubject(@RequestBody SubjectEntity subjectEntity) {
-        Subject subject = SubjectUtil.toSubject(subjectEntity);
-        subjectService.addSubject(subject);
-        return SubjectUtil.toSubjectEntity(subject);
+        return subjectService.addSubject(subjectEntity);
+    }
+
+    @GetMapping("query")
+    public QueryResultEntity<List<SubjectEntity>> query(
+            @RequestParam("pageSize") Integer pageSize,
+            @RequestParam("currentPage") Integer currentPage
+    ) {
+        SubjectQueryParam subjectQueryParam = new SubjectQueryParam();
+        subjectQueryParam.setPageSize(pageSize);
+        subjectQueryParam.setCurrentPage(currentPage);
+        return subjectService.query(subjectQueryParam);
     }
 }

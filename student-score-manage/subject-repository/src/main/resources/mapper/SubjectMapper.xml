@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.subject.repository.dao.SubjectDao">
+    
+    <resultMap id="baseResultMap" type="org.graduate.subject.repository.model.Subject">
+        <id property="id" column="id" />
+        <result property="no" column="no" />
+        <result property="name" column="name" />
+    </resultMap>
 
     <insert id="save" parameterType="org.graduate.subject.repository.model.Subject" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <trim prefix="INSERT INTO ssm_teacher (" suffix=")" suffixOverrides=",">
@@ -12,5 +18,13 @@
             <if test="name != null">#{name},</if>
         </trim>
     </insert>
+
+    <select id="query" parameterType="org.graduate.subject.repository.model.SubjectQueryParam" resultMap="baseResultMap">
+        SELECT * FROM ssm_teacher
+    </select>
+
+    <select id="queryCount" parameterType="org.graduate.subject.repository.model.SubjectQueryParam" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM ssm_teacher
+    </select>
 
 </mapper>
