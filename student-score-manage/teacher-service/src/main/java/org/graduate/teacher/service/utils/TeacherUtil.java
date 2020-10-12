@@ -7,13 +7,17 @@ import org.springframework.beans.BeanUtils;
 public class TeacherUtil {
     public static TeacherEntity toTeacherEntity(Teacher teacher) {
         TeacherEntity teacherEntity = new TeacherEntity();
-        BeanUtils.copyProperties(teacher, teacherEntity);
+        if (teacher != null) {
+            BeanUtils.copyProperties(teacher, teacherEntity);
+        }
         return teacherEntity;
     }
 
     public static Teacher toTeacher(TeacherEntity teacherEntity) {
         Teacher teacher = new Teacher();
-        BeanUtils.copyProperties(teacherEntity, teacher);
+        if (teacherEntity != null) {
+            BeanUtils.copyProperties(teacherEntity, teacher);
+        }
         return teacher;
 
     }
