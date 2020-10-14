@@ -36,6 +36,11 @@ public class TeacherController {
         return teacherService.addTeacher(teacherEntity);
     }
 
+    @PostMapping("update")
+    public TeacherEntity update(@RequestBody TeacherEntity teacherEntity) {
+        return teacherService.updateTeacher(teacherEntity);
+    }
+
     @GetMapping("query")
     public QueryResultEntity<List<TeacherEntity>> query(
             @RequestParam("pageSize") Integer pageSize,
@@ -45,7 +50,5 @@ public class TeacherController {
         teacherQueryParam.setPageSize(pageSize);
         teacherQueryParam.setCurrentPage(currentPage);
         return teacherService.query(teacherQueryParam);
-
-
     }
 }

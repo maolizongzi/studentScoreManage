@@ -16,7 +16,6 @@
             $.ajax({
                 url: serverUrl + '/teacher/login',
                 type: 'post',
-                async: false,
                 contentType: 'application/json',
                 data: JSON.stringify({ 'no': no, 'password': password }),
                 success: function (result) {
@@ -28,7 +27,6 @@
                 },
                 error: function (err) {
                     console.log(err);
-                    console.error(err);
                 }
             });
         });

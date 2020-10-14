@@ -8,11 +8,9 @@
         $.ajax({
             url: serverUrl + '/subject/query',
             type: 'get',
-            async: false,
             contentType: 'application/json',
             data: { 'pageSize': 10, 'currentPage': 1 },
             success: function (result) {
-                debugger;
                 var code = result['code'];
                 var data = result['data'];
                 if (code === '00') {

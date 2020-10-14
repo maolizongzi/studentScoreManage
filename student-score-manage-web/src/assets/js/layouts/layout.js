@@ -36,8 +36,10 @@
                         $('#page-title').text();
                         $('#page-title').text(obj['name']);
                         $('#content').empty();
+                        // $.get(obj['path'], function (result) {
+                        //     $('#content').html(result);
+                        // })
                         $('#content').load(obj['path']);
-                        console.log('load');
                     });
                 });
                 feather.replace();
