@@ -17,7 +17,7 @@
             success: function (menuContent) {
                 menu = menuContent['menu-item-data'];
                 var ul = $('<ul></ul>');
-                ul.attr({ class: 'nav flex-column mb-2' });
+                ul.attr({ class: 'nav flex-column' });
                 $.each(menu, function (index, obj) {
                     var li = $('<li></li>');
                     li.attr({ class: 'nav-item' });
@@ -36,9 +36,6 @@
                         $('#page-title').text();
                         $('#page-title').text(obj['name']);
                         $('#content').empty();
-                        // $.get(obj['path'], function (result) {
-                        //     $('#content').html(result);
-                        // })
                         $('#content').load(obj['path']);
                     });
                 });

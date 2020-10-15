@@ -30,6 +30,13 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
+    public ClassesEntity updateClasses(ClassesEntity classesEntity) {
+        Classes classes = ClassesUtil.toClasses(classesEntity);
+        classesDao.update(classes);
+        return ClassesUtil.toClassesEntity(classes);
+    }
+
+    @Override
     public QueryResultEntity<List<ClassesEntity>> query(QueryClassesParam queryClassesParam) {
 
         List<Classes> classes = classesDao.query(queryClassesParam);
@@ -41,4 +48,6 @@ public class ClassesServiceImpl implements ClassesService {
         queryResultEntity.setData(classesEntities);
         return queryResultEntity;
     }
+
+
 }

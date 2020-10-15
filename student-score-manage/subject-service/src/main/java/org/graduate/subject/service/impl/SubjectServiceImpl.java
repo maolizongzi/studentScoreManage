@@ -40,4 +40,11 @@ public class SubjectServiceImpl implements SubjectService {
         queryResultEntity.setData(subjectEntities);
         return queryResultEntity;
     }
+
+    @Override
+    public SubjectEntity updateSubject(SubjectEntity subjectEntity) {
+        Subject subject = SubjectUtil.toSubject(subjectEntity);
+        subjectDao.update(subject);
+        return SubjectUtil.toSubjectEntity(subject);
+    }
 }

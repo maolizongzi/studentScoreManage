@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("subject")
 public class SubjectController {
 
-
     private final SubjectService subjectService;
 
     @Autowired
@@ -26,14 +25,24 @@ public class SubjectController {
         return subjectService.addSubject(subjectEntity);
     }
 
+    public SubjectEntity updateSubject(@RequestParam SubjectEntity subjectEntity) {
+        return subjectService.updateSubject(subjectEntity);
+    }
+
     @GetMapping("query")
     public QueryResultEntity<List<SubjectEntity>> query(
             @RequestParam("pageSize") Integer pageSize,
-            @RequestParam("currentPage") Integer currentPage
+            @RequestParam("currentPage") Integer currentPage,
+            @RequestParam(value = "id", required = false) Long id,
+            @RequestParam(value = "no", required = false) String no,
+            @RequestParam(value = "name", required = false) String name
     ) {
         SubjectQueryParam subjectQueryParam = new SubjectQueryParam();
         subjectQueryParam.setPageSize(pageSize);
         subjectQueryParam.setCurrentPage(currentPage);
+        subjectQueryParam.setId(id);
+        subjectQueryParam.setNo(no);
+        subjectQueryParam.setName(name);
         return subjectService.query(subjectQueryParam);
     }
 }

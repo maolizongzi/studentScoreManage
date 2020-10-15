@@ -11,4 +11,6 @@ public interface SubjectService {
     SubjectEntity addSubject(SubjectEntity subjectEntity);
 
     QueryResultEntity<List<SubjectEntity>> query(SubjectQueryParam subjectQueryParam);
+
+    SubjectEntity updateSubject(SubjectEntity subjectEntity);
 }

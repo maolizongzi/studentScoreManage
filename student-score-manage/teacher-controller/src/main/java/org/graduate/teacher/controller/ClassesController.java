@@ -23,18 +23,31 @@ public class ClassesController {
 
     @PostMapping("add")
     public ClassesEntity addClasses(@RequestBody ClassesEntity classesEntity) {
-        return     classesService.addClasses(classesEntity);
+        return classesService.addClasses(classesEntity);
+    }
+
+    @PostMapping
+    public ClassesEntity updateClasses(@RequestBody ClassesEntity classesEntity){
+        return classesService.updateClasses(classesEntity);
     }
 
 
     @GetMapping("query")
     public QueryResultEntity<List<ClassesEntity>> query(
             @RequestParam("pageSize") Integer pageSize,
-            @RequestParam("currentPage") Integer currentPage
+            @RequestParam("currentPage") Integer currentPage,
+            @RequestParam(value = "id", required = false) Long id,
+            @RequestParam(value = "no", required = false) String no,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "grade", required = false) Integer grade
     ) {
         QueryClassesParam queryClassesParam = new QueryClassesParam();
         queryClassesParam.setPageSize(pageSize);
         queryClassesParam.setCurrentPage(currentPage);
+        queryClassesParam.setId(id);
+        queryClassesParam.setNo(no);
+        queryClassesParam.setName(name);
+        queryClassesParam.setGrade(grade);
         return classesService.query(queryClassesParam);
     }
 }
