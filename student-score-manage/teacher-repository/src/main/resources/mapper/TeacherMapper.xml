@@ -57,7 +57,7 @@
     </select>
 
     <select id="query" parameterType="org.graduate.teacher.repository.model.TeacherQueryParam" resultMap="baseResultMap">
-        SELECT COUNT(*) FROM ssm_teacher
+        SELECT * FROM ssm_teacher
     </select>
 
     <select id="queryCount" parameterType="org.graduate.teacher.repository.model.TeacherQueryParam" resultType="java.lang.Integer">

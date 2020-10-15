@@ -12,6 +12,8 @@ public interface TeacherService {
 
     TeacherEntity addTeacher(TeacherEntity teacherEntity);
 
+    TeacherEntity updateTeacher(TeacherEntity teacherEntity);
+
     TeacherLoginEntity loginByTeacherNo(String teacherNo, String password);
 
     QueryResultEntity<List<TeacherEntity>> query(TeacherQueryParam teacherQueryParam);

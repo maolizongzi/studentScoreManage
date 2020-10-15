@@ -51,6 +51,13 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public TeacherEntity updateTeacher(TeacherEntity teacherEntity) {
+        Teacher teacher = TeacherUtil.toTeacher(teacherEntity);
+        teacherDao.update(teacher);
+        return TeacherUtil.toTeacherEntity(teacher);
+    }
+
+    @Override
     public TeacherLoginEntity loginByTeacherNo(String teacherNo, String password) {
         Teacher teacher = teacherDao.queryByNo(teacherNo);
         String encryptedPassword = "";
