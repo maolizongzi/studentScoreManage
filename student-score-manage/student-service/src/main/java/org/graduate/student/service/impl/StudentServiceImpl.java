@@ -1,5 +1,6 @@
 package org.graduate.student.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.graduate.base.general.entity.QueryResultEntity;
 import org.graduate.base.general.utility.AESUtil;
 import org.graduate.student.repository.dao.StudentDao;
@@ -43,6 +44,20 @@ public class StudentServiceImpl implements StudentService {
         }
         studentDao.save(student);
         student.setNo(buildStudentNo(student.getAdmissionDate(), student.getId(), student.getClassesId()));
+        studentDao.update(student);
+        return StudentUtil.toStudentEntity(student);
+    }
+
+    @Override
+    public StudentEntity updateStudent(StudentEntity studentEntity) {
+        Student student = StudentUtil.toStudent(studentEntity);
+        if (StringUtils.isNotEmpty(student.getPassword())) {
+            try {
+                student.setPassword(AESUtil.encrypt(passwordKey, student.getPassword()));
+            } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
+                e.printStackTrace();
+            }
+        }
         studentDao.update(student);
         return StudentUtil.toStudentEntity(student);
     }
