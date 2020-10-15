@@ -9,5 +9,8 @@ import java.util.List;
 public interface StudentService {
 
     StudentEntity addStudent(StudentEntity student);
+
+    StudentEntity updateStudent(StudentEntity studentEntity);
+
     QueryResultEntity<List<StudentEntity>> query(StudentQueryParam studentQueryParam);
 }

@@ -1,5 +1,6 @@
 package org.graduate.teacher.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.graduate.base.general.entity.QueryResultEntity;
 import org.graduate.base.general.utility.AESUtil;
 import org.graduate.teacher.repository.dao.TeacherDao;
@@ -53,6 +54,13 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherEntity updateTeacher(TeacherEntity teacherEntity) {
         Teacher teacher = TeacherUtil.toTeacher(teacherEntity);
+        if (StringUtils.isNotEmpty(teacher.getPassword())) {
+            try {
+                teacher.setPassword(AESUtil.encrypt(passwordKey, teacher.getPassword()));
+            } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
+                e.printStackTrace();
+            }
+        }
         teacherDao.update(teacher);
         return TeacherUtil.toTeacherEntity(teacher);
     }

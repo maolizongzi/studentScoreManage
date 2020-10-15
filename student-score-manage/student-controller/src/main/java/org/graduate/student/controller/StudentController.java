@@ -1,5 +1,6 @@
 package org.graduate.student.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.graduate.base.general.entity.QueryResultEntity;
 import org.graduate.student.repository.model.StudentQueryParam;
 import org.graduate.student.service.StudentService;
@@ -20,9 +21,14 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @PostMapping("add")
+    @PostMapping("register")
     public StudentEntity addStudent(@RequestBody StudentEntity studentEntity) {
         return studentService.addStudent(studentEntity);
+    }
+
+    @PostMapping("update")
+    public StudentEntity updateStudent(@RequestBody StudentEntity studentEntity) {
+        return studentService.updateStudent(studentEntity);
     }
 
 
@@ -30,11 +36,14 @@ public class StudentController {
     public QueryResultEntity<List<StudentEntity>> query(
             @RequestParam("pageSize") Integer pageSize,
             @RequestParam("currentPage") Integer currentPage,
-            @RequestParam(value = "studentNo", required = false) String studentNo
+            @RequestParam(value = "no", required = false) String no
     ) {
         StudentQueryParam studentQueryParam = new StudentQueryParam();
         studentQueryParam.setPageSize(pageSize);
         studentQueryParam.setCurrentPage(currentPage);
+        if (StringUtils.isNoneEmpty(no)) {
+            studentQueryParam.setNo(no);
+        }
         return studentService.query(studentQueryParam);
     }
 }
