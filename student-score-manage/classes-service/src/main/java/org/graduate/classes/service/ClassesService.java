@@ -13,4 +13,6 @@ public interface ClassesService {
     ClassesEntity addClasses(ClassesEntity classesEntity);
 
     QueryResultEntity<List<ClassesEntity>> query(QueryClassesParam queryClassesParam);
+
+    ClassesEntity updateClasses(ClassesEntity classesEntity);
 }

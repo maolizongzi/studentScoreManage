@@ -22,6 +22,17 @@
         </trim>
     </insert>
 
+    <update id="update" parameterType="org.graduate.classes.repository.model.Classes">
+        UPDATE ssm_classes
+        <set>
+            <if test="no != null">no = #{no},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="grade != null">grade = #{grade},</if>
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
     <select id="query" parameterType="org.graduate.classes.repository.model.QueryClassesParam" resultMap="baseResultMap">
         SELECT * FROM ssm_classes
     </select>

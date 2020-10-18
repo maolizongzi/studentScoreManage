@@ -13,4 +13,6 @@ public interface ClassesDao {
     Integer queryCount(QueryClassesParam queryClassesParam);
 
     List<Classes> query(QueryClassesParam queryClassesParam);
+
+    void update(Classes classes);
 }
