@@ -50,9 +50,7 @@ public class StudentController {
             @RequestParam(value = "status", required = false) Integer status,
             @RequestParam(value = "classesId", required = false) Long classesId
     ) {
-        StudentQueryParam studentQueryParam = new StudentQueryParam();
-        studentQueryParam.setPageSize(pageSize);
-        studentQueryParam.setCurrentPage(currentPage);
+        StudentQueryParam studentQueryParam = new StudentQueryParam(currentPage, pageSize);
         studentQueryParam.setId(id);
         studentQueryParam.setNo(no);
         studentQueryParam.setName(name);

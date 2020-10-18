@@ -8,6 +8,10 @@ public class QueryClassesParam extends BaseQueryParam {
     private String name;
     private Integer grade;
 
+    public QueryClassesParam(Integer currentPage, Integer pageSize) {
+        super(currentPage, pageSize);
+    }
+
     public Long getId() {
         return id;
     }

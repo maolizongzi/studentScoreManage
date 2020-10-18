@@ -27,7 +27,7 @@ public class ClassesController {
     }
 
     @PostMapping
-    public ClassesEntity updateClasses(@RequestBody ClassesEntity classesEntity){
+    public ClassesEntity updateClasses(@RequestBody ClassesEntity classesEntity) {
         return classesService.updateClasses(classesEntity);
     }
 
@@ -41,9 +41,7 @@ public class ClassesController {
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "grade", required = false) Integer grade
     ) {
-        QueryClassesParam queryClassesParam = new QueryClassesParam();
-        queryClassesParam.setPageSize(pageSize);
-        queryClassesParam.setCurrentPage(currentPage);
+        QueryClassesParam queryClassesParam = new QueryClassesParam(currentPage, pageSize);
         queryClassesParam.setId(id);
         queryClassesParam.setNo(no);
         queryClassesParam.setName(name);

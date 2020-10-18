@@ -37,9 +37,7 @@ public class SubjectController {
             @RequestParam(value = "no", required = false) String no,
             @RequestParam(value = "name", required = false) String name
     ) {
-        SubjectQueryParam subjectQueryParam = new SubjectQueryParam();
-        subjectQueryParam.setPageSize(pageSize);
-        subjectQueryParam.setCurrentPage(currentPage);
+        SubjectQueryParam subjectQueryParam = new SubjectQueryParam(currentPage, pageSize);
         subjectQueryParam.setId(id);
         subjectQueryParam.setNo(no);
         subjectQueryParam.setName(name);

@@ -19,8 +19,8 @@
     </tbody>
 </table>
 
-<ul class="pagination">
-    <li class="page-item">
+<ul class="pagination" id="teacher-pagination">
+    <!-- <li class="page-item">
         <a class="page-link" href="#" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
         </a>
@@ -32,7 +32,7 @@
         <a class="page-link" href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
         </a>
-    </li>
+    </li> -->
 </ul>
 
 <div class="modal" id="edit-teacher-modal">
@@ -54,6 +54,7 @@
                                         <label for="no">教师编号</label>
                                         <input type="text" class="form-control" id="no" name="no" disabled readonly />
                                         <input type="hidden" value="" id="action" />
+                                        <input type="hidden" value="" id="id" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -92,15 +93,15 @@
                                     <div class="col-md-6 mb-3">
                                         <label for="gender">性别</label>
                                         <select class="custom-select d-block w-100" id="gender" name="gender" required>
-                                            <option>男</option>
-                                            <option>女</option>
+                                            <option value="1">男</option>
+                                            <option value="0">女</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="status">任职状态</label>
                                         <select class="custom-select d-block w-100" id="status" name="status" required>
-                                            <option>在职</option>
-                                            <option>离职</option>
+                                            <option value="0">在职</option>
+                                            <option value="1">离职</option>
                                         </select>
                                     </div>
                                 </div>
@@ -119,4 +120,5 @@
 <script src="/src/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/src/assets/js/bootstrap-datepicker-1.9.0-dist/bootstrap-datepicker.min.js"></script>
 <script src="/src/assets/js/bootstrap-datepicker-1.9.0-dist/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="/src/assets/js/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
 <script src="/src/assets/js/teacher/list/list.js"></script>
