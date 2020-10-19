@@ -58,10 +58,31 @@
 
     <select id="query" parameterType="org.graduate.teacher.repository.model.TeacherQueryParam" resultMap="baseResultMap">
         SELECT * FROM ssm_teacher
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="gender != null">AND gender = #{gender}</if>
+            <if test="telephone != null">AND telephone = #{telephone}</if>
+            <if test="admissionDate != null">AND admission_date = #{admissionDate}</if>
+            <if test="resignDate != null">AND resign_date = #{resignDate}</if>
+            <if test="status != null">AND status = #{status}</if>
+        </where>
+        LIMIT #{startIndex}, #{pageSize}
     </select>
 
     <select id="queryCount" parameterType="org.graduate.teacher.repository.model.TeacherQueryParam" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM ssm_teacher
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="gender != null">AND gender = #{gender}</if>
+            <if test="telephone != null">AND telephone = #{telephone}</if>
+            <if test="admissionDate != null">AND admission_date = #{admissionDate}</if>
+            <if test="resignDate != null">AND resign_date = #{resignDate}</if>
+            <if test="status != null">AND status = #{status}</if>
+        </where>
     </select>
 
 </mapper>
