@@ -18,21 +18,7 @@
     <tbody id="table-content">
     </tbody>
 </table>
-<ul class="pagination">
-    <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-        </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-        </a>
-    </li>
-</ul>
+<ul class="pagination" id="student-pagination"></ul>
 
 <div class="modal" id="edit-student-modal">
     <div class="modal-dialog modal-xl">
@@ -53,6 +39,7 @@
                                         <label for="no">学生编号</label>
                                         <input type="text" class="form-control" id="no" name="no" disabled readonly />
                                         <input type="hidden" value="" id="action" />
+                                        <input type="hidden" value="" id="id" name="id" />
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="name">学生姓名</label>

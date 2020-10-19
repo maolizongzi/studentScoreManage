@@ -22,12 +22,36 @@
         </trim>
     </insert>
 
+    <update id="update" parameterType="org.graduate.classes.repository.model.Classes">
+        UPDATE ssm_classes
+        <set>
+            <if test="no != null">no = #{no},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="grade != null">grade = #{grade},</if>
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
     <select id="query" parameterType="org.graduate.classes.repository.model.QueryClassesParam" resultMap="baseResultMap">
         SELECT * FROM ssm_classes
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="grade != null">AND grade = #{grade}</if>
+        </where>
+        LIMIT #{startIndex}, #{pageSize}
     </select>
 
     <select id="queryCount" parameterType="org.graduate.classes.repository.model.QueryClassesParam" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM ssm_classes
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="grade != null">AND grade = #{grade}</if>
+        </where>
     </select>
 
 </mapper>

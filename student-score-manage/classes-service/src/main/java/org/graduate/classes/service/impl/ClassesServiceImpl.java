@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ClassesServiceImpl implements ClassesService {
@@ -25,7 +26,15 @@ public class ClassesServiceImpl implements ClassesService {
     @Override
     public ClassesEntity addClasses(ClassesEntity classesEntity) {
         Classes classes = ClassesUtil.toClasses(classesEntity);
+        classes.setNo(UUID.randomUUID().toString());
         classesDao.save(classes);
+        return ClassesUtil.toClassesEntity(classes);
+    }
+
+    @Override
+    public ClassesEntity updateClasses(ClassesEntity classesEntity) {
+        Classes classes = ClassesUtil.toClasses(classesEntity);
+        classesDao.update(classes);
         return ClassesUtil.toClassesEntity(classes);
     }
 
@@ -39,6 +48,10 @@ public class ClassesServiceImpl implements ClassesService {
         classes.forEach(o -> classesEntities.add(ClassesUtil.toClassesEntity(o)));
         QueryResultEntity<List<ClassesEntity>> queryResultEntity = new QueryResultEntity<>(queryClassesParam.getPageSize(), count);
         queryResultEntity.setData(classesEntities);
+        queryResultEntity.setCode("00");
+        queryResultEntity.setResult("success");
         return queryResultEntity;
     }
+
+
 }

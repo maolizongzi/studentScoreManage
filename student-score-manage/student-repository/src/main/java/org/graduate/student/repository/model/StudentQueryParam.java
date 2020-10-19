@@ -19,6 +19,10 @@ public class StudentQueryParam extends BaseQueryParam {
     private Integer status;
     private Long classesId;
 
+    public StudentQueryParam(Integer currentPage, Integer pageSize) {
+        super(currentPage, pageSize);
+    }
+
     public Long getId() {
         return id;
     }

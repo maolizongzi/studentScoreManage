@@ -40,8 +40,12 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherEntity addTeacher(TeacherEntity teacherEntity) {
         Teacher teacher = TeacherUtil.toTeacher(teacherEntity);
+        String password = teacher.getTelephone();
+        if (StringUtils.isNotEmpty(teacher.getPassword())) {
+            password = teacher.getPassword();
+        }
         try {
-            teacher.setPassword(AESUtil.encrypt(passwordKey, teacher.getTelephone()));
+            teacher.setPassword(AESUtil.encrypt(passwordKey, password));
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
             e.printStackTrace();
         }

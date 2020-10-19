@@ -4,7 +4,7 @@ public class Classes {
     private Long id;
     private String no;
     private String name;
-    private int grade;
+    private Integer grade;
 
     public Long getId() {
         return id;

@@ -8,6 +8,7 @@ import org.graduate.student.service.entity.StudentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -36,14 +37,32 @@ public class StudentController {
     public QueryResultEntity<List<StudentEntity>> query(
             @RequestParam("pageSize") Integer pageSize,
             @RequestParam("currentPage") Integer currentPage,
-            @RequestParam(value = "no", required = false) String no
+            @RequestParam(value = "id", required = false) Long id,
+            @RequestParam(value = "no", required = false) String no,
+            @RequestParam(value = "gender", required = false) Integer gender,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "password", required = false) String password,
+            @RequestParam(value = "identityNo", required = false) String identityNo,
+            @RequestParam(value = "address", required = false) String address,
+            @RequestParam(value = "birthday", required = false) Date birthday,
+            @RequestParam(value = "admissionDate", required = false) Date admissionDate,
+            @RequestParam(value = "graduationDate", required = false) Date graduationDate,
+            @RequestParam(value = "status", required = false) Integer status,
+            @RequestParam(value = "classesId", required = false) Long classesId
     ) {
-        StudentQueryParam studentQueryParam = new StudentQueryParam();
-        studentQueryParam.setPageSize(pageSize);
-        studentQueryParam.setCurrentPage(currentPage);
-        if (StringUtils.isNoneEmpty(no)) {
-            studentQueryParam.setNo(no);
-        }
+        StudentQueryParam studentQueryParam = new StudentQueryParam(currentPage, pageSize);
+        studentQueryParam.setId(id);
+        studentQueryParam.setNo(no);
+        studentQueryParam.setName(name);
+        studentQueryParam.setGender(gender);
+        studentQueryParam.setPassword(password);
+        studentQueryParam.setIdentityNo(identityNo);
+        studentQueryParam.setAddress(address);
+        studentQueryParam.setBirthday(birthday);
+        studentQueryParam.setAdmissionDate(admissionDate);
+        studentQueryParam.setGraduationDate(graduationDate);
+        studentQueryParam.setStatus(status);
+        studentQueryParam.setClassesId(classesId);
         return studentService.query(studentQueryParam);
     }
 }

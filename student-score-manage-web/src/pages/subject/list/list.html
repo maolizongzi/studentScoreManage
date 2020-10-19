@@ -1,29 +1,74 @@
-<link href="/src/assets/css/subject/list/list.css" rel="stylesheet" type="text/css" />
+<link href="/src/assets/css/classes/list/list.css" rel="stylesheet" type="text/css" />
+<div class="btn-toolbar mb-3">
+    <button type="button" class="btn btn-outline-primary btn-sm" id="add-classes">新增</button>
+</div>
 <table class="table table-striped table-sm">
     <thead>
         <tr>
-            <th>课程编号</th>
-            <th>课程名称</th>
+            <th>班级编号</th>
+            <th>班级名称</th>
+            <th>班级所在年级</th>
         </tr>
     </thead>
     <tbody id="table-content">
     </tbody>
 </table>
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
-<script src="/src/assets/js/subject/list/list.js"></script>
+
+<ul class="pagination">
+    <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>
+
+<div class="modal" id="edit-classes-modal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">编辑课程信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 order-md-1 container">
+                            <div class="needs-validation" id="classes-data">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="no">课程编号</label>
+                                        <input type="text" class="form-control" id="no" name="no" disabled readonly />
+                                        <input type="hidden" value="" id="action" />
+                                        <input type="hidden" value="" id="id" />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name">课程名称</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <div class="invalid-feedback">
+                                            课程名称没有填写
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-classes" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="save-classes">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/src/assets/js/classes/list/list.js"></script>
