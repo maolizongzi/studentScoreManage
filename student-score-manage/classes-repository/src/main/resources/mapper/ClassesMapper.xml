@@ -35,10 +35,23 @@
 
     <select id="query" parameterType="org.graduate.classes.repository.model.QueryClassesParam" resultMap="baseResultMap">
         SELECT * FROM ssm_classes
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="grade != null">AND grade = #{grade}</if>
+        </where>
+        LIMIT #{startIndex}, #{pageSize}
     </select>
 
     <select id="queryCount" parameterType="org.graduate.classes.repository.model.QueryClassesParam" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM ssm_classes
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="grade != null">AND grade = #{grade}</if>
+        </where>
     </select>
 
 </mapper>

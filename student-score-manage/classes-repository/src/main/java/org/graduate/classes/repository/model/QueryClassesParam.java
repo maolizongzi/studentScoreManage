@@ -36,11 +36,11 @@ public class QueryClassesParam extends BaseQueryParam {
         this.name = name;
     }
 
-    public int getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 }
