@@ -117,7 +117,6 @@ function save_teacher(server_url) {
     data['gender'] = gender;
     data['status'] = status;
     console.log(data);
-    debugger;
     let api_url = server_url + '/teacher/register';
     if ($('#action').val() === 'update') {
         api_url = server_url + '/teacher/update';
@@ -134,7 +133,7 @@ function save_teacher(server_url) {
             let data = result['data'];
             if (code === '00') {
                 $.bootstrapGrowl('保存成功', { type: 'success' });
-                $('#edit-teacher-modal').modal({ 'show': false });
+                $('#edit-teacher-modal').modal('hide');
                 build_teacher_table(server_url, 1);
 
             }

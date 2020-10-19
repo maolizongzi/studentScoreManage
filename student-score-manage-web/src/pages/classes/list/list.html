@@ -7,34 +7,21 @@
         <tr>
             <th>班级编号</th>
             <th>班级名称</th>
-            <th>班级所在年级</th>
+            <th>所在年级</th>
+            <th>操作</th>
         </tr>
     </thead>
     <tbody id="table-content">
     </tbody>
 </table>
 
-<ul class="pagination">
-    <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-        </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-        </a>
-    </li>
-</ul>
+<ul class="pagination" id="classes-pagination"></ul>
 
 <div class="modal" id="edit-classes-modal">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">编辑课程信息</h5>
+                <h5 class="modal-title">编辑班级信息</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -46,17 +33,28 @@
                             <div class="needs-validation" id="classes-data">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="no">课程编号</label>
+                                        <label for="no">班级编号</label>
                                         <input type="text" class="form-control" id="no" name="no" disabled readonly />
                                         <input type="hidden" value="" id="action" />
-                                        <input type="hidden" value="" id="id" />
+                                        <input type="hidden" value="" id="id" name="id" />
                                     </div>
+
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="name">课程名称</label>
+                                        <label for="name">班级名称</label>
                                         <input type="text" class="form-control" id="name" name="name" required>
                                         <div class="invalid-feedback">
-                                            课程名称没有填写
+                                            班级名称没有填写
                                         </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="grade">所在年级</label>
+                                        <select class="custom-select d-block w-100" id="grade" name="grade" required>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -71,4 +69,5 @@
         </div>
     </div>
 </div>
-<script src="/src/assets/js/classes/list/list.js"></script>
+<script src="/src/assets/js/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
+<script src="/src/assets/js/clsases/list/list.js"></script>
