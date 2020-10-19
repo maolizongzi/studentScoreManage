@@ -122,18 +122,18 @@ function build_classes_table(server_url, current_page) {
             let data = result['data'];
             if (code === '00') {
                 $.each(data, function (index, obj) {
-                    const classes_no_td = $('<td></td>');
+                    let classes_no_td = $('<td></td>');
                     classes_no_td.text(obj['no']);
-                    const classes_name_td = $('<td></td>');
+                    let classes_name_td = $('<td></td>');
                     classes_name_td.text(obj['name']);
-                    const classes_grade_td = $('<td></td>');
+                    let classes_grade_td = $('<td></td>');
                     classes_grade_td.text(obj['grade']);
-                    const edit_button = $('<button>编辑</button>');
+                    let edit_button = $('<button>编辑</button>');
                     edit_button.attr({ 'class': 'btn btn-outline-primary btn-sm' });
                     edit_button.on('click', function () { to_edit_modal(server_url, obj['id']); });
-                    const operation_td = $('<td></td>');
+                    let operation_td = $('<td></td>');
                     operation_td.append(edit_button);
-                    const tr = $('<tr></tr>');
+                    let tr = $('<tr></tr>');
                     tr.append(classes_no_td);
                     tr.append(classes_name_td);
                     tr.append(classes_grade_td);
