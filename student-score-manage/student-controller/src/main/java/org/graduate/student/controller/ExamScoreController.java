@@ -38,9 +38,7 @@ public class ExamScoreController {
     public QueryResultEntity<List<ExamScoreEntity>> query(
             @RequestParam("pageSize") Integer pageSize,
             @RequestParam("currentPage") Integer currentPage) {
-        ExamScoreQueryParam examScoreQueryParam = new ExamScoreQueryParam();
-        examScoreQueryParam.setPageSize(pageSize);
-        examScoreQueryParam.setCurrentPage(currentPage);
+        ExamScoreQueryParam examScoreQueryParam = new ExamScoreQueryParam(pageSize,currentPage);
         return examScoreService.query(examScoreQueryParam);
     }
     /**
@@ -51,9 +49,7 @@ public class ExamScoreController {
     public QueryResultEntity<List<ExamScoreEntity>> pieChart(
             @RequestParam("pageSize") Integer pageSize,
             @RequestParam("currentPage") Integer currentPage) {
-        ExamScoreQueryParam examScoreQueryParam = new ExamScoreQueryParam();
-        examScoreQueryParam.setPageSize(pageSize);
-        examScoreQueryParam.setCurrentPage(currentPage);
+        ExamScoreQueryParam examScoreQueryParam = new ExamScoreQueryParam(pageSize,currentPage);
         return examScoreService.query(examScoreQueryParam);
     }
 
