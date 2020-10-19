@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.student.repository.dao.ExamScoreDao">
 
+    <resultMap id="baseResultMap" type="org.graduate.student.repository.model.ExamScore">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="student_no" property="studentNo"/>
+        <result column="student_name" property="studentName"/>
+        <result column="subject_id" property="subjectId"/>
+        <result column="subject_no" property="subjectNo"/>
+        <result column="subject_name" property="subjectName"/>
+        <result column="exam_id" property="examId"/>
+        <result column="exam_no" property="examNo"/>
+        <result column="exam_name" property="examName"/>
+        <result column="exam_score" property="examScore"/>
+        <result column="exam_date" property="examDate"/>
+        <result column="classes_id" property="classesId"/>
+        <result column="classes_no" property="classesNo"/>
+        <result column="classes_name" property="classesName"/>
+    </resultMap>
     <insert id="save" parameterType="org.graduate.student.repository.model.ExamScore" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <trim prefix="INSERT INTO ssm_exam_score (" suffix=")" suffixOverrides=",">
             <if test="studentId != null">student_id,</if>
@@ -17,6 +34,7 @@
             <if test="examDate != null">exam_date,</if>
             <if test="classesId != null">classes_id,</if>
             <if test="classesNo != null">classes_no,</if>
+            <if test="classesName != null">classes_name,</if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="studentId != null">#{studentId},</if>
@@ -32,7 +50,13 @@
             <if test="examDate != null">exam_date,</if>
             <if test="classesId != null">classes_id,</if>
             <if test="classesNo != null">classes_no,</if>
+            <if test="classesName != null">classes_name,</if>
         </trim>
     </insert>
-
+    <select id="query" parameterType="org.graduate.student.repository.model.ExamScoreQueryParam" resultMap="baseResultMap">
+        SELECT * FROM ssm_exam_score
+    </select>
+    <select id="queryCount" parameterType="org.graduate.student.repository.model.ExamScoreQueryParam" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM ssm_exam_score
+    </select>
 </mapper>

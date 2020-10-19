@@ -8,6 +8,7 @@ public class ExamScore {
     private String studentNo;
     private String studentName;
     private Long subjectId;
+    private String subjectNo;
     private String subjectName;
     private Long examId;
     private String examNo;
@@ -128,5 +129,13 @@ public class ExamScore {
 
     public void setClassesName(String classesName) {
         this.classesName = classesName;
+    }
+
+    public String getSubjectNo() {
+        return subjectNo;
+    }
+
+    public void setSubjectNo(String subjectNo) {
+        this.subjectNo = subjectNo;
     }
 }

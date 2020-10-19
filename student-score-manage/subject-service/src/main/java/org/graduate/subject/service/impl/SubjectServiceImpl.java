@@ -38,6 +38,8 @@ public class SubjectServiceImpl implements SubjectService {
         subjects.forEach(o -> subjectEntities.add(SubjectUtil.toSubjectEntity(o)));
         QueryResultEntity<List<SubjectEntity>> queryResultEntity = new QueryResultEntity<>(subjectQueryParam.getPageSize(), count);
         queryResultEntity.setData(subjectEntities);
+        queryResultEntity.setCode("00");
+        queryResultEntity.setResult("success");
         return queryResultEntity;
     }
 }

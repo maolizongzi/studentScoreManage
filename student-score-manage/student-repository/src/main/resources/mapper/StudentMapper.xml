@@ -56,10 +56,10 @@
             <if test="identityNo != null">identity_no = #{identityNo},</if>
             <if test="address != null">address = #{address},</if>
             <if test="status != null">status = #{status},</if>
-            <if test="classes_id != null">classes_id = #{classesId},</if>
+            <if test="classesId != null">classes_id = #{classesId},</if>
             <if test="birthday != null">birthday = #{birthday},</if>
-            <if test="admission_date != null">admission_date = #{admissionDate},</if>
-            <if test="graduation_date != null">graduation_date = #{graduationDate},</if>
+            <if test="admissionDate != null">admission_date = #{admissionDate},</if>
+            <if test="graduationDate != null">graduation_date = #{graduationDate},</if>
         </set>
         WHERE id = #{id}
     </update>
