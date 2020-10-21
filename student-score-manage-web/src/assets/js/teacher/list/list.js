@@ -98,7 +98,6 @@ function build_teacher_table_pagination(current_page, total_page, server_url) {
 }
 
 function save_teacher(server_url) {
-    console.log('save_teacher');
     let input_arr = $('#teacher-data input');
     let data = {}
     $.each(input_arr, function (index, obj) {
@@ -135,7 +134,6 @@ function save_teacher(server_url) {
                 $.bootstrapGrowl('保存成功', { type: 'success' });
                 $('#edit-teacher-modal').modal('hide');
                 build_teacher_table(server_url, 1);
-
             }
         },
         error: function () {

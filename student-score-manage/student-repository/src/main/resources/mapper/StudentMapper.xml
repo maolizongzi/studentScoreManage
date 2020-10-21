@@ -8,7 +8,7 @@
         <result column="gender" property="gender"/>
         <result column="name" property="name"/>
         <result column="password" property="password"/>
-        <result column="identity" property="identityNo"/>
+        <result column="identity_no" property="identityNo"/>
         <result column="address" property="address"/>
         <result column="birthday" property="birthday"/>
         <result column="admission_date" property="admissionDate"/>
@@ -56,20 +56,47 @@
             <if test="identityNo != null">identity_no = #{identityNo},</if>
             <if test="address != null">address = #{address},</if>
             <if test="status != null">status = #{status},</if>
-            <if test="classes_id != null">classes_id = #{classesId},</if>
+            <if test="classesId != null">classes_id = #{classesId},</if>
             <if test="birthday != null">birthday = #{birthday},</if>
-            <if test="admission_date != null">admission_date = #{admissionDate},</if>
-            <if test="graduation_date != null">graduation_date = #{graduationDate},</if>
+            <if test="admissionDate != null">admission_date = #{admissionDate},</if>
+            <if test="graduationDate != null">graduation_date = #{graduationDate},</if>
         </set>
         WHERE id = #{id}
     </update>
 
     <select id="query" parameterType="org.graduate.student.repository.model.StudentQueryParam" resultMap="baseResultMap">
         SELECT * FROM ssm_student
-
+        <where>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="gender != null">AND gender = #{gender}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="password != null">AND password = #{password}</if>
+            <if test="identityNo != null">AND identity_no = #{identityNo}</if>
+            <if test="address != null">AND address = #{address}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="classesId != null">AND classes_id = #{classesId}</if>
+            <if test="birthday != null">AND birthday = #{birthday}</if>
+            <if test="admissionDate != null">AND admission_date = #{admissionDate}</if>
+            <if test="graduationDate != null">AND graduation_date = #{graduationDate}</if>
+        </where>
+        LIMIT #{startIndex}, #{pageSize}
     </select>
+
     <select id="queryCount" parameterType="org.graduate.student.repository.model.StudentQueryParam" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM ssm_student
+        <where>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="gender != null">AND gender = #{gender}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="password != null">AND password = #{password}</if>
+            <if test="identityNo != null">AND identity_no = #{identityNo}</if>
+            <if test="address != null">AND address = #{address}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="classesId != null">AND classes_id = #{classesId}</if>
+            <if test="birthday != null">AND birthday = #{birthday}</if>
+            <if test="admissionDate != null">AND admission_date = #{admissionDate}</if>
+            <if test="graduationDate != null">AND graduation_date = #{graduationDate}</if>
+        </where>
     </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package org.graduate.student.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import org.graduate.base.general.entity.BaseResultEntity;
 import org.graduate.base.general.entity.QueryResultEntity;
 import org.graduate.student.repository.model.StudentQueryParam;
 import org.graduate.student.service.StudentService;
@@ -23,13 +24,35 @@ public class StudentController {
     }
 
     @PostMapping("register")
-    public StudentEntity addStudent(@RequestBody StudentEntity studentEntity) {
-        return studentService.addStudent(studentEntity);
+    public BaseResultEntity<StudentEntity> addStudent(@RequestBody StudentEntity studentEntity) {
+        BaseResultEntity<StudentEntity> baseResultEntity = new BaseResultEntity<>();
+        baseResultEntity.setCode("01");
+        baseResultEntity.setResult("fail");
+        try {
+            StudentEntity resultStudentEntity = studentService.addStudent(studentEntity);
+            baseResultEntity.setCode("00");
+            baseResultEntity.setResult("success");
+            baseResultEntity.setData(resultStudentEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return baseResultEntity;
     }
 
     @PostMapping("update")
-    public StudentEntity updateStudent(@RequestBody StudentEntity studentEntity) {
-        return studentService.updateStudent(studentEntity);
+    public BaseResultEntity<StudentEntity> updateStudent(@RequestBody StudentEntity studentEntity) {
+        BaseResultEntity<StudentEntity> baseResultEntity = new BaseResultEntity<>();
+        baseResultEntity.setCode("01");
+        baseResultEntity.setResult("fail");
+        try {
+            StudentEntity resultStudentEntity = studentService.updateStudent(studentEntity);
+            baseResultEntity.setCode("00");
+            baseResultEntity.setResult("success");
+            baseResultEntity.setData(resultStudentEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return baseResultEntity;
     }
 
 
