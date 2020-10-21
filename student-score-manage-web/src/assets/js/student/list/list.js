@@ -18,6 +18,7 @@
 
 
 function build_student_table(server_url, current_page) {
+
     $('#table-content').html('');
     $.ajax({
         url: server_url + '/student/query',
@@ -58,7 +59,7 @@ function build_student_table(server_url, current_page) {
                     tr.append(option_td);
                     $('#table-content').append(tr);
                 });
-                build_student_table_pagination(current_page, result['totalPage']);
+                build_student_table_pagination(current_page, result['totalPage'], server_url);
             }
         },
         error: function (err) {
@@ -188,6 +189,7 @@ function build_classes_select(server_url, current_page) {
 }
 
 function build_student_table_pagination(current_page, total_page, server_url) {
+
     $('#student-pagination').html('');
     let page_interval = 2;
     let start_index = current_page - page_interval;

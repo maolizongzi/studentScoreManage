@@ -68,7 +68,7 @@ public class StudentServiceImpl implements StudentService {
         List<StudentEntity> studentEntities = new ArrayList<>();
         students.forEach(o -> studentEntities.add(StudentUtil.toStudentEntity(o)));
         Integer count = studentDao.queryCount(studentQueryParam);
-        QueryResultEntity<List<StudentEntity>> queryResultEntity = new QueryResultEntity<>(studentQueryParam.getCurrentPage(), count);
+        QueryResultEntity<List<StudentEntity>> queryResultEntity = new QueryResultEntity<>(studentQueryParam.getPageSize(), count);
         queryResultEntity.setCode("00");
         queryResultEntity.setResult("success");
         queryResultEntity.setData(studentEntities);

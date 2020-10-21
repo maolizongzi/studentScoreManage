@@ -31,10 +31,21 @@
 
     <select id="query" parameterType="org.graduate.subject.repository.model.SubjectQueryParam" resultMap="baseResultMap">
         SELECT * FROM ssm_subject
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="no != null">no = #{no}</if>
+            <if test="name != null">name = #{name}</if>
+        </where>
+        LIMIT #{startIndex}, #{pageSize}
     </select>
 
     <select id="queryCount" parameterType="org.graduate.subject.repository.model.SubjectQueryParam" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM ssm_subject
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="no != null">no = #{no}</if>
+            <if test="name != null">name = #{name}</if>
+        </where>
     </select>
 
 </mapper>

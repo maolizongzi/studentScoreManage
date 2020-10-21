@@ -1,5 +1,6 @@
 package org.graduate.teacher.controller;
 
+import org.graduate.base.general.entity.BaseResultEntity;
 import org.graduate.base.general.entity.QueryResultEntity;
 import org.graduate.subject.repository.model.SubjectQueryParam;
 import org.graduate.subject.service.SubjectService;
@@ -21,12 +22,35 @@ public class SubjectController {
     }
 
     @PostMapping("add")
-    public SubjectEntity addSubject(@RequestBody SubjectEntity subjectEntity) {
-        return subjectService.addSubject(subjectEntity);
+    public BaseResultEntity<SubjectEntity> addSubject(@RequestBody SubjectEntity subjectEntity) {
+        BaseResultEntity<SubjectEntity> baseResultEntity = new BaseResultEntity<>();
+        baseResultEntity.setCode("01");
+        baseResultEntity.setResult("fail");
+        try {
+            SubjectEntity resultSubjectEntity = subjectService.addSubject(subjectEntity);
+            baseResultEntity.setCode("00");
+            baseResultEntity.setResult("success");
+            baseResultEntity.setData(resultSubjectEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return baseResultEntity;
     }
 
-    public SubjectEntity updateSubject(@RequestParam SubjectEntity subjectEntity) {
-        return subjectService.updateSubject(subjectEntity);
+    @PostMapping("update")
+    public BaseResultEntity<SubjectEntity> updateSubject(@RequestBody SubjectEntity subjectEntity) {
+        BaseResultEntity<SubjectEntity> baseResultEntity = new BaseResultEntity<>();
+        baseResultEntity.setCode("01");
+        baseResultEntity.setResult("fail");
+        try {
+            SubjectEntity resultSubjectEntity = subjectService.updateSubject(subjectEntity);
+            baseResultEntity.setCode("00");
+            baseResultEntity.setResult("success");
+            baseResultEntity.setData(resultSubjectEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return baseResultEntity;
     }
 
     @GetMapping("query")
