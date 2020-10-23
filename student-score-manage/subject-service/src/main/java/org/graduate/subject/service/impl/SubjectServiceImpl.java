@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -26,6 +27,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectEntity addSubject(SubjectEntity subjectEntity) {
         Subject subject = SubjectUtil.toSubject(subjectEntity);
+        subject.setNo(UUID.randomUUID().toString());
         subjectDao.save(subject);
         return SubjectUtil.toSubjectEntity(subject);
     }

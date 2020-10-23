@@ -25,6 +25,32 @@
             "authority": ""
         },
         {
+            "name": "二级菜单",
+            "path": "",
+            "icon": "align-justify",
+            "authority": "",
+            "child": [
+                {
+                    "name": "菜单1",
+                    "path": "/src/pages/subject/list/list.html",
+                    "icon": "align-justify",
+                    "authority": ""
+                },
+                {
+                    "name": "菜单2",
+                    "path": "/src/pages/subject/list/list.html",
+                    "icon": "align-justify",
+                    "authority": ""
+                },
+                {
+                    "name": "菜单3",
+                    "path": "/src/pages/subject/list/list.html",
+                    "icon": "align-justify",
+                    "authority": ""
+                }
+            ]
+        },
+        {
             "name": "成绩管理",
             "path": "/src/pages/examScore/list/list.html",
             "icon": "align-justify",
