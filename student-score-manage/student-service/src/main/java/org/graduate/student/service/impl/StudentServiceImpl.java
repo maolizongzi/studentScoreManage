@@ -79,7 +79,7 @@ public class StudentServiceImpl implements StudentService {
     private String buildStudentNo(Date admissionDate, Long id, Long classesId) {
         return "S" +
                 new SimpleDateFormat("yyyyMMdd").format(admissionDate) +
-                String.format("%02d%n", classesId) +
-                String.format("%03d%n", id);
+                String.format("%02d", classesId) +
+                String.format("%03d", id);
     }
 }

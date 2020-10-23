@@ -49,6 +49,12 @@
                     "authority": ""
                 }
             ]
+        },
+        {
+            "name": "成绩管理",
+            "path": "/src/pages/examScore/list/list.html",
+            "icon": "align-justify",
+            "authority": ""
         }
     ]
 }
