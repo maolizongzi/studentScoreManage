@@ -25,6 +25,26 @@
             "authority": ""
         },
         {
+            "name": "系统管理",
+            "path": "",
+            "icon": "settings",
+            "authority": "",
+            "child": [
+                {
+                    "name": "角色管理",
+                    "path": "",
+                    "icon": "users",
+                    "authority": ""
+                },
+                {
+                    "name": "权限管理",
+                    "path": "/src/pages/authority/authority.html",
+                    "icon": "shield",
+                    "authority": ""
+                }
+            ]
+        },
+        {
             "name": "二级菜单",
             "path": "",
             "icon": "align-justify",
