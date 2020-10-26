@@ -32,7 +32,7 @@
             "child": [
                 {
                     "name": "角色管理",
-                    "path": "",
+                    "path": "/src/pages/role/list/list.html",
                     "icon": "users",
                     "authority": ""
                 },
