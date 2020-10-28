@@ -4,69 +4,142 @@
             "name": "学生管理",
             "path": "/src/pages/student/list/list.html",
             "icon": "align-justify",
-            "authority": ""
+            "permissions": {
+                "menu": "student",
+                "operation": [
+                    {
+                        "name": "列表",
+                        "permission": "student-list"
+                    },
+                    {
+                        "name": "新增",
+                        "permission": "student-add"
+                    },
+                    {
+                        "name": "修改",
+                        "permission": "student-update"
+                    }
+                ]
+            }
         },
         {
             "name": "教师管理",
             "path": "/src/pages/teacher/list/list.html",
             "icon": "align-justify",
-            "authority": ""
+            "permissions": {
+                "menu": "teacher",
+                "operation": [
+                    {
+                        "name": "列表",
+                        "permission": "teacher-list"
+                    },
+                    {
+                        "name": "新增",
+                        "permission": "teacher-add"
+                    },
+                    {
+                        "name": "修改",
+                        "permission": "teacher-update"
+                    }
+                ]
+            }
         },
         {
             "name": "班级管理",
             "path": "/src/pages/classes/list/list.html",
             "icon": "align-justify",
-            "authority": ""
+            "permission": "classes",
+            "permissions": {
+                "menu": "classes",
+                "operation": [
+                    {
+                        "name": "列表",
+                        "permission": "classes-list"
+                    },
+                    {
+                        "name": "新增",
+                        "permission": "classes-add"
+                    },
+                    {
+                        "name": "修改",
+                        "permission": "classes-update"
+                    }
+                ]
+            }
         },
         {
             "name": "课程管理",
             "path": "/src/pages/subject/list/list.html",
             "icon": "align-justify",
-            "authority": ""
+            "permissions": {
+                "menu": "subject",
+                "operation": [
+                    {
+                        "name": "列表",
+                        "permission": "subject-list"
+                    },
+                    {
+                        "name": "新增",
+                        "permission": "subject-add"
+                    },
+                    {
+                        "name": "修改",
+                        "permission": "subject-update"
+                    }
+                ]
+            }
         },
         {
             "name": "系统管理",
             "path": "",
             "icon": "settings",
-            "authority": "",
+            "permissions": {
+                "menu": "settings"
+            },
             "child": [
                 {
                     "name": "角色管理",
                     "path": "/src/pages/role/list/list.html",
                     "icon": "users",
-                    "authority": ""
+                    "permissions": {
+                        "menu": "role",
+                        "operation": [
+                            {
+                                "name": "列表",
+                                "permission": "role-list"
+                            },
+                            {
+                                "name": "新增",
+                                "permission": "role-add"
+                            },
+                            {
+                                "name": "修改",
+                                "permission": "role-update"
+                            }
+                        ]
+                    }
                 },
                 {
                     "name": "权限管理",
-                    "path": "/src/pages/authority/authority.html",
+                    "path": "/src/pages/permission/permission.html",
                     "icon": "shield",
-                    "authority": ""
-                }
-            ]
-        },
-        {
-            "name": "二级菜单",
-            "path": "",
-            "icon": "align-justify",
-            "authority": "",
-            "child": [
-                {
-                    "name": "菜单1",
-                    "path": "/src/pages/subject/list/list.html",
-                    "icon": "align-justify",
-                    "authority": ""
-                },
-                {
-                    "name": "菜单2",
-                    "path": "/src/pages/subject/list/list.html",
-                    "icon": "align-justify",
-                    "authority": ""
-                },
-                {
-                    "name": "菜单3",
-                    "path": "/src/pages/subject/list/list.html",
-                    "icon": "align-justify",
-                    "authority": ""
+                    "permissions": {
+                        "menu": "permission",
+                        "operation": [
+                            {
+                                "name": "列表",
+                                "permission": "permission-list"
+                            },
+                            {
+                                "name": "新增",
+                                "permission": "permission-add"
+                            },
+                            {
+                                "name": "修改",
+                                "permission": "permission-update"
+                            }
+                        ]
+                    }
                 }
             ]
         },
@@ -74,7 +147,9 @@
             "name": "成绩管理",
             "path": "/src/pages/examScore/list/list.html",
             "icon": "align-justify",
-            "authority": ""
+            "permissions": {
+                "menu": "examScore"
+            }
         }
     ]
 }

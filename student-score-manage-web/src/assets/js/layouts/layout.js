@@ -43,7 +43,7 @@ function build_sidebar_menu(item, menu_content) {
         menu_li.append(menu_link);
         item.append(menu_li);
         if (menu_item['child']) {
-            let timestamp = Date.parse(new Date());
+            let timestamp = new Date().getTime();
             let child_id = 'child' + timestamp;
             menu_link.attr({
                 'href': '#' + child_id,
