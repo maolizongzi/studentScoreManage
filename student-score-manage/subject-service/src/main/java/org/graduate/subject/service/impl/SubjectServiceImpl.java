@@ -10,7 +10,9 @@ import org.graduate.subject.service.utility.SubjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,8 +28,9 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public SubjectEntity addSubject(SubjectEntity subjectEntity) {
+        Integer count=subjectDao.queryCount(new SubjectQueryParam());
         Subject subject = SubjectUtil.toSubject(subjectEntity);
-        subject.setNo(UUID.randomUUID().toString());
+        subject.setNo(buildStudentNo(count==0?1:count+1));
         subjectDao.save(subject);
         return SubjectUtil.toSubjectEntity(subject);
     }
@@ -50,5 +53,14 @@ public class SubjectServiceImpl implements SubjectService {
         Subject subject = SubjectUtil.toSubject(subjectEntity);
         subjectDao.update(subject);
         return SubjectUtil.toSubjectEntity(subject);
+    }
+
+    @Override
+    public void deleteSubject(Long id) {
+        subjectDao.delete(id);
+    }
+
+    private static String buildStudentNo( Integer id) {
+        return "1001"+String.format("%03d", id);
     }
 }

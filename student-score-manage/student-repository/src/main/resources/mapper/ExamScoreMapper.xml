@@ -4,59 +4,220 @@
 
     <resultMap id="baseResultMap" type="org.graduate.student.repository.model.ExamScore">
         <id column="id" property="id"/>
-        <result column="student_id" property="studentId"/>
         <result column="student_no" property="studentNo"/>
         <result column="student_name" property="studentName"/>
-        <result column="subject_id" property="subjectId"/>
         <result column="subject_no" property="subjectNo"/>
         <result column="subject_name" property="subjectName"/>
-        <result column="exam_id" property="examId"/>
         <result column="exam_no" property="examNo"/>
         <result column="exam_name" property="examName"/>
         <result column="exam_score" property="examScore"/>
         <result column="exam_date" property="examDate"/>
-        <result column="classes_id" property="classesId"/>
         <result column="classes_no" property="classesNo"/>
         <result column="classes_name" property="classesName"/>
     </resultMap>
     <insert id="save" parameterType="org.graduate.student.repository.model.ExamScore" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <trim prefix="INSERT INTO ssm_exam_score (" suffix=")" suffixOverrides=",">
-            <if test="studentId != null">student_id,</if>
             <if test="studentNo != null">student_no,</if>
             <if test="studentName != null">student_name,</if>
-            <if test="subjectId != null">subject_id,</if>
             <if test="subjectNo != null">subject_no,</if>
             <if test="subjectName != null">subject_name,</if>
-            <if test="examId != null">exam_id,</if>
             <if test="examNo != null">exam_no,</if>
             <if test="examName != null">exam_name,</if>
             <if test="examScore != null">exam_score,</if>
             <if test="examDate != null">exam_date,</if>
-            <if test="classesId != null">classes_id,</if>
             <if test="classesNo != null">classes_no,</if>
             <if test="classesName != null">classes_name,</if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-            <if test="studentId != null">#{studentId},</if>
             <if test="studentNo != null">#{studentNo},</if>
             <if test="studentName != null">#{studentName},</if>
-            <if test="subjectId != null">#{subjectId},</if>
             <if test="subjectNo != null">#{subjectNo},</if>
             <if test="subjectName != null">#{subjectName},</if>
-            <if test="examId != null">exam_id,</if>
-            <if test="examNo != null">exam_no,</if>
-            <if test="examName != null">exam_name,</if>
-            <if test="examScore != null">exam_score,</if>
-            <if test="examDate != null">exam_date,</if>
-            <if test="classesId != null">classes_id,</if>
-            <if test="classesNo != null">classes_no,</if>
-            <if test="classesName != null">classes_name,</if>
+            <if test="examNo != null">#{examNo},</if>
+            <if test="examName != null">#{examName},</if>
+            <if test="examScore != null">#{examScore},</if>
+            <if test="examDate != null">#{examDate},</if>
+            <if test="classesNo != null">#{classesNo},</if>
+            <if test="classesName != null">#{classesName},</if>
         </trim>
     </insert>
     <select id="query" parameterType="org.graduate.student.repository.model.ExamScoreQueryParam" resultMap="baseResultMap">
-        SELECT * FROM ssm_exam_score
+        SELECT * FROM ssm_exam_score where 1=1
+        <if test="classesNo != null ">
+            AND classes_no =  #{classesNo}
+        </if>
+        <if test="examNo != null ">
+            AND exam_no= #{examNo}
+        </if>
+        <if test="subjectNo != null ">
+            AND subject_no= #{subjectNo}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        LIMIT #{startIndex}, #{pageSize}
     </select>
     <select id="queryCount" parameterType="org.graduate.student.repository.model.ExamScoreQueryParam" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM ssm_exam_score
+    </select>
+    <select id="countByPhaseScore" parameterType="org.graduate.student.repository.model.ExamScoreQueryParam" resultType="org.graduate.student.repository.model.ExamScoreQueryParam">
+        select sum(case when exam_score between 0 and 59 then 1 else 0 end   ) as flunkPeople,
+        sum(case when exam_score between 60 and 74 then 1 else 0 end   ) as passPeople,
+        sum(case when exam_score between 75 and 84 then 1 else 0 end   ) as averagePeople,
+        sum(case when exam_score between 85 and 100 then 1 else 0 end   ) as excellentPeople
+        from ssm_exam_score t where  1=1
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="subjectName != null ">
+            AND subject_name= #{subjectName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+    </select>
+    <select id="countByGradeScore" parameterType="org.graduate.student.repository.model.ExamScoreQueryParam" resultType="org.graduate.student.repository.model.ExamScoreQueryParam">
+        select  classes_name as classesName,
+        sum(case when exam_score between 0 and 59 then 1 else 0 end   ) as flunkPeople,
+        sum(case when exam_score between 60 and 74 then 1 else 0 end   ) as passPeople,
+        sum(case when exam_score between 75 and 84 then 1 else 0 end   ) as averagePeople,
+        sum(case when exam_score between 85 and 100 then 1 else 0 end   ) as excellentPeople
+        from ssm_exam_score  t  where  1=1
+        <if test="classesName != null ">
+            AND classes_name like  CONCAT(#{classesName},'%')
+        </if>
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="subjectName != null ">
+            AND subject_name= #{subjectName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        group by t.classes_name
+    </select>
+
+    <select id="queryStudentAllScore" parameterType="org.graduate.student.repository.model.ExamScoreQueryParam" resultType="org.graduate.student.repository.model.ExamScoreQueryParam">
+        select  s.no studentNo ,s.name studentName,
+        (select t.exam_score from ssm_exam_score t where 1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='语文' and t.student_no= s.no) as chinese,
+        (select t.exam_score from ssm_exam_score t where 1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='数学' and t.student_no= s.no) as mathematical,
+        (select t.exam_score from ssm_exam_score t where 1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='英语' and t.student_no= s.no) as english,
+        (select t.exam_score from ssm_exam_score t where 1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='物理' and t.student_no= s.no) as physical,
+        (select t.exam_score from ssm_exam_score t where 1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='化学' and t.student_no= s.no) as chemical,
+        (select t.exam_score from ssm_exam_score t where 1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='生物' and t.student_no= s.no) as biological,
+        (select t.exam_score from ssm_exam_score t where  1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='政治' and t.student_no= s.no) as political,
+        (select t.exam_score from ssm_exam_score t where  1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='地理' and t.student_no= s.no) as geography,
+        (select t.exam_score from ssm_exam_score t where 1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.subject_name='历史' and t.student_no= s.no) as history,
+        (select sum(t.exam_score) from ssm_exam_score t where  1=1
+        <if test="examName != null ">
+            AND exam_name= #{examName}
+        </if>
+        <if test="examDateStr != null ">
+            AND  Date(exam_date) =#{examDateStr}
+        </if>
+        <if test="classesNo != null ">
+            AND classes_no= #{classesNo}
+        </if>
+        and t.student_no= s.no ) as allScore
+        from ssm_student s
+        where 1=1
+        <if test="classesNo != null ">
+            AND s.classes_no= #{classesNo}
+        </if>
+        order by allScore desc
     </select>
 </mapper>

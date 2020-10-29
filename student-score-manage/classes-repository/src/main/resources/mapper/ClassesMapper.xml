@@ -41,7 +41,8 @@
             <if test="name != null">AND name = #{name}</if>
             <if test="grade != null">AND grade = #{grade}</if>
         </where>
-        LIMIT #{startIndex}, #{pageSize}
+        order by no desc
+        <if test="startIndex!=null">LIMIT #{startIndex}, #{pageSize} </if>
     </select>
 
     <select id="queryCount" parameterType="org.graduate.classes.repository.model.QueryClassesParam" resultType="java.lang.Integer">
@@ -51,6 +52,7 @@
             <if test="no != null">AND no = #{no}</if>
             <if test="name != null">AND name = #{name}</if>
             <if test="grade != null">AND grade = #{grade}</if>
+            <if test="nameGrade != null">AND name like  CONCAT(#{nameGrade},'%') </if>
         </where>
     </select>
 

@@ -2,15 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.subject.repository.dao.ExamDao">
 
+    <resultMap id="baseResultMap" type="org.graduate.subject.repository.model.Exam">
+        <id property="id" column="id"/>
+        <result property="no" column="no"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
     <insert id="save" parameterType="org.graduate.subject.repository.model.Exam" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        <trim prefix="INSERT INTO ssm_teacher (" suffix=")" suffixOverrides=",">
+        <trim prefix="INSERT INTO ssm_exam (" suffix=")" suffixOverrides=",">
             <if test="no != null">no,</if>
             <if test="name != null">name,</if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="no != null">#{no},</if>
-            <if test="name != null">#{name}</if>
+            <if test="name != null">#{name},</if>
         </trim>
     </insert>
+
+    <update id="update" parameterType="org.graduate.subject.repository.model.Exam">
+        UPDATE ssm_exam
+        <set>
+            <if test="no != null">no = #{no},</if>
+            <if test="name != null">name = #{name},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="query" parameterType="org.graduate.subject.repository.model.ExamQueryParam" resultMap="baseResultMap">
+        SELECT * FROM ssm_exam
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="name != null">AND name = #{name}</if>
+        </where>
+        LIMIT #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="queryCount" parameterType="org.graduate.subject.repository.model.ExamQueryParam" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM ssm_exam
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="no != null">AND no = #{no}</if>
+            <if test="name != null">AND name = #{name}</if>
+        </where>
+    </select>
+
 
 </mapper>

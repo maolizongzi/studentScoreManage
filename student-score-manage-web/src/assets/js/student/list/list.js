@@ -10,7 +10,7 @@
         $('#graduation-date').datepicker({ language: 'zh-CN' });
         $('#register-student').on('click', function () { to_register_student(); });
         $('#cancel-student').on('click', function () { clear_student(); });
-        $('#save-student').on('click', function () { save_student(server_url); })
+        $('#save-student').on('click', function () { save_student(server_url); });
         build_student_table(server_url, 1);
         build_classes_select(server_url, 1);
     });
@@ -30,20 +30,21 @@ function build_student_table(server_url, current_page) {
             let data = result['data'];
             if (code === '00') {
                 $.each(data, function (index, obj) {
+                    debugger;
                     let tr = $('<tr></tr>');
                     let student_no_td = $('<td></td>');
                     student_no_td.text(obj['no']);
                     let student_name_td = $('<td></td>');
                     student_name_td.text(obj['name']);
                     let gender_td = $('<td></td>');
-                    gender_td.text(obj['gender'] === '0' ? '男' : '女');
+                    gender_td.text(obj['gender'] === 0 ? '男' : '女');
                     let identity_no_td = $('<td></td>');
                     identity_no_td.text(obj['identityNo']);
                     let borthday_td = $('<td></td>');
                     borthday_td.text(obj['birthday']);
                     let status_td = $('<td></td>');
                     let status_text = '未毕业';
-                    if (obj['status'] === '1') { status_text = '毕业'; } else if (obj['status'] === '2') { status_text = '退学'; }
+                    if (obj['status'] === 1) { status_text = '毕业'; } else if (obj['status'] === 2) { status_text = '退学'; }
                     status_td.text(status_text);
                     let option_td = $('<td></td>')
                     let edit_button = $('<button>编辑</button>');
@@ -87,7 +88,7 @@ function save_student(server_url) {
     let classes = $('#classes').val();
     data['gender'] = gender;
     data['status'] = status;
-    data['classesId'] = classes;
+    data['classesNo'] = classes;
     console.log(data);
     let api_url = server_url + '/student/register';
     if ($('#action').val() === 'update') {
@@ -145,7 +146,7 @@ function to_edit_student(server_url, id) {
                 $('#graduation-date').val(student['graduationDate']);
                 $('#telephone').val(student['telephone']);
                 $('#gender').val(student['gender']);
-                $('#classes').val(student['classesId']);
+                $('#classes').val(student['classesNo']);
                 $('#status').val(student['status']);
                 $('#action').val('update');
                 $('#edit-student-modal').modal({ 'show': true });
@@ -176,7 +177,7 @@ function build_classes_select(server_url, current_page) {
                 $.each(data, function (index, obj) {
                     let classes_option = $('<option></option>');
                     classes_option.text(obj['name']);
-                    classes_option.val(obj['id']);
+                    classes_option.val(obj['no']);
                     $('#classes').append(classes_option);
                 });
             }

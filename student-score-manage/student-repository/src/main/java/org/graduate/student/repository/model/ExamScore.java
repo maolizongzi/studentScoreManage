@@ -4,18 +4,18 @@ import java.util.Date;
 
 public class ExamScore {
     private Long id;
-    private Long studentId;
+//    private Long studentId;
     private String studentNo;
     private String studentName;
-    private Long subjectId;
+//    private Long subjectId;
     private String subjectNo;
     private String subjectName;
-    private Long examId;
+//    private Long examId;
     private String examNo;
     private String examName;
     private Double examScore;
     private Date examDate;
-    private Long classesId;
+//    private Long classesId;
     private String classesNo;
     private String classesName;
 
@@ -27,13 +27,6 @@ public class ExamScore {
         this.id = id;
     }
 
-    public Long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
 
     public String getStudentNo() {
         return studentNo;
@@ -51,13 +44,7 @@ public class ExamScore {
         this.studentName = studentName;
     }
 
-    public Long getSubjectId() {
-        return subjectId;
-    }
 
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
-    }
 
     public String getSubjectName() {
         return subjectName;
@@ -67,13 +54,7 @@ public class ExamScore {
         this.subjectName = subjectName;
     }
 
-    public Long getExamId() {
-        return examId;
-    }
 
-    public void setExamId(Long examId) {
-        this.examId = examId;
-    }
 
     public String getExamNo() {
         return examNo;
@@ -107,13 +88,6 @@ public class ExamScore {
         this.examDate = examDate;
     }
 
-    public Long getClassesId() {
-        return classesId;
-    }
-
-    public void setClassesId(Long classesId) {
-        this.classesId = classesId;
-    }
 
     public String getClassesNo() {
         return classesNo;

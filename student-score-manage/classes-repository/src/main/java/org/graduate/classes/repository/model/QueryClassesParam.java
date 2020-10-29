@@ -7,11 +7,14 @@ public class QueryClassesParam extends BaseQueryParam {
     private String no;
     private String name;
     private Integer grade;
+    private String nameGrade;//模糊查询
 
     public QueryClassesParam(Integer currentPage, Integer pageSize) {
         super(currentPage, pageSize);
     }
+    public QueryClassesParam(){
 
+    }
     public Long getId() {
         return id;
     }
@@ -42,5 +45,13 @@ public class QueryClassesParam extends BaseQueryParam {
 
     public void setGrade(Integer grade) {
         this.grade = grade;
+    }
+
+    public String getNameGrade() {
+        return nameGrade;
+    }
+
+    public void setNameGrade(String nameGrade) {
+        this.nameGrade = nameGrade;
     }
 }

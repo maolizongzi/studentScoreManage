@@ -1,9 +1,15 @@
-package org.graduate.subject.service.entity;
+package org.graduate.subject.repository.model;
 
-public class ExamEntity {
+import org.graduate.base.general.entity.BaseQueryParam;
+
+public class ExamQueryParam extends BaseQueryParam {
     private Long id;
     private String no;
     private String name;
+
+    public ExamQueryParam(Integer currentPage, Integer pageSize) {
+        super(currentPage, pageSize);
+    }
 
     public Long getId() {
         return id;

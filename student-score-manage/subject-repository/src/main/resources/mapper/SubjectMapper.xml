@@ -28,6 +28,12 @@
         WHERE
             id = #{id}
     </update>
+    <delete id="delete" parameterType="java.lang.Long" >
+        delete from  ssm_subject
+        <where>
+            <if test="id != null">  id = #{id}</if>
+        </where>
+    </delete>
 
     <select id="query" parameterType="org.graduate.subject.repository.model.SubjectQueryParam" resultMap="baseResultMap">
         SELECT * FROM ssm_subject

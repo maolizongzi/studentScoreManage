@@ -1,5 +1,44 @@
 <link href="/src/assets/css/subject/list/list.css" rel="stylesheet" type="text/css" />
-
+<link href="/src/assets/css/bootstrap-datepicker-1.9.0-dist/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <div class="needs-validation" id="exam-query-data">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="status">班级编号</label>
+                <select class="custom-select d-block w-100" id="classesId" name="classesNo"
+                required>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="status">考试科目</label>
+                <select class="custom-select d-block w-100" id="subjectNameId" name="subjectNo" required>
+                    <option value="1">语文</option>
+                    <option value="0">数学</option>
+                    <option value="2">英语</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="status">考试名称</label>
+                <select class="custom-select d-block w-100" id="examNameId" name="examNo" required>
+                    <option value="1">月考</option>
+                    <option value="0">期中考</option>
+                    <option value="2">期末考</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="birthday">考试时间</label>
+                <input type="text" class="form-control" id="examDateId" name="examDate" required
+                readonly>
+            </div>
+            <div class="col-md-4 mb-3" style="margin-left: 50px;">
+                <button type="button" class="btn btn-outline-primary btn-sm" id="to-exam">查询</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-outline-primary btn-sm" id="add-examScore">新增</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-outline-primary btn-sm" id="download-examScore">下载</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
 <table class="table table-striped table-sm">
     <thead>
         <tr>
@@ -15,24 +54,92 @@
     <tbody id="table-content">
     </tbody>
 </table>
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
-<div id="main" width="2038" height="240" style="display: block; height: 230px; width: 1019px;  "></div>
+<ul class="pagination" id="examScore-pagination"></ul>
+<div id="main" width="1238" height="180" style="display: block; height: 170px; width: 1440px;"></div>
 
+<div class="modal" id="edit-examScore-modal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">录入学生成绩</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 order-md-1 container">
+                            <div class="needs-validation" id="examScore-data">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="no">学生编号</label>
+                                        <input type="text" class="form-control" id="studentNo" name="studentNo"/>
+                                        <input type="hidden" value="" id="action" />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name">学生姓名</label>
+                                        <input type="text" class="form-control" id="studentName" name="studentName" required>
+                                        <div class="invalid-feedback">
+                                            学生姓名没有填写
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="birthday">考试日期</label>
+                                        <input type="text" class="form-control" id="examDate" name="examDate" required
+                                            readonly>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="score">考试分数</label>
+                                        <input type="text" class="form-control" id="examScoreId" name="examScore" required>
+                                        <div class="invalid-feedback">
+                                            考试分数没有填写
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="status">科目</label>
+                                        <select class="custom-select d-block w-100" id="subjectName" name="subjectName" required>
+                                            <option value="1">语文</option>
+                                            <option value="0">数学</option>
+                                            <option value="2">英语</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="status">考试名称</label>
+                                        <select class="custom-select d-block w-100" id="examName" name="examName" required>
+                                            <option value="1">月考</option>
+                                            <option value="0">期中考</option>
+                                            <option value="2">期末考</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="classes">所在班级</label>
+                                        <select class="custom-select d-block w-100" id="classes" name="classes"
+                                            required>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-student" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="save-examScore">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/src/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/src/assets/js/bootstrap-datepicker-1.9.0-dist/bootstrap-datepicker.min.js"></script>
+<script src="/src/assets/js/bootstrap-datepicker-1.9.0-dist/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="/src/assets/js/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
 <script src="/src/assets/js/echarts/echarts.min.js"></script>
 <script src="/src/assets/js/exam-score/echarts/classPieChart.js"></script>

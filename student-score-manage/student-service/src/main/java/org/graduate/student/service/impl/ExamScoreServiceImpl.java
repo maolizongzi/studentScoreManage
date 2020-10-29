@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ExamScoreServiceImpl implements ExamScoreService {
@@ -24,8 +25,10 @@ public class ExamScoreServiceImpl implements ExamScoreService {
     }
 
     @Override
-    public void addExamScore(ExamScore examScore) {
-        examScoreDao.save(examScore);
+    public ExamScoreEntity addExamScore(ExamScoreEntity examScoreEntity) {
+            ExamScore examScore= ExamScoreUtil.toExamScore(examScoreEntity);
+            examScoreDao.save(examScore);
+            return ExamScoreUtil.toExamScoreEntity(examScore);
     }
 
     @Override
@@ -39,6 +42,21 @@ public class ExamScoreServiceImpl implements ExamScoreService {
         queryResultEntity.setCode("00");
         queryResultEntity.setResult("success");
         return queryResultEntity;
+    }
+
+    @Override
+    public ExamScoreQueryParam countByPhaseScore(ExamScoreQueryParam examScoreQueryParam) {
+        return examScoreDao.countByPhaseScore(examScoreQueryParam);
+    }
+
+    @Override
+    public List<ExamScoreQueryParam> countByGradeScore(ExamScoreQueryParam examScoreQueryParam) {
+        return examScoreDao.countByGradeScore(examScoreQueryParam);
+    }
+
+    @Override
+    public List<ExamScoreQueryParam> queryStudentAllScore(ExamScoreQueryParam examScoreQueryParam) {
+        return examScoreDao.queryStudentAllScore(examScoreQueryParam);
     }
 
 }

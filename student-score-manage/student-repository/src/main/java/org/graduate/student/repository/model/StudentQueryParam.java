@@ -17,12 +17,14 @@ public class StudentQueryParam extends BaseQueryParam {
     private Date admissionDate;
     private Date graduationDate;
     private Integer status;
-    private Long classesId;
+    private String classesNo;
 
     public StudentQueryParam(Integer currentPage, Integer pageSize) {
         super(currentPage, pageSize);
     }
 
+    public StudentQueryParam() {
+    }
     public Long getId() {
         return id;
     }
@@ -111,11 +113,11 @@ public class StudentQueryParam extends BaseQueryParam {
         this.status = status;
     }
 
-    public Long getClassesId() {
-        return classesId;
+    public String getClassesNo() {
+        return classesNo;
     }
 
-    public void setClassesId(Long classesId) {
-        this.classesId = classesId;
+    public void setClassesNo(String classesNo) {
+        this.classesNo = classesNo;
     }
 }

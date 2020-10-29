@@ -10,7 +10,7 @@ public class SubjectQueryParam extends BaseQueryParam {
     public SubjectQueryParam(Integer currentPage, Integer pageSize) {
         super(currentPage, pageSize);
     }
-
+    public SubjectQueryParam(){}
     public Long getId() {
         return id;
     }

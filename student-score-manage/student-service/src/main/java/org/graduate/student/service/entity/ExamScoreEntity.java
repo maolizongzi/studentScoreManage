@@ -4,19 +4,22 @@ import java.util.Date;
 
 public class ExamScoreEntity {
     private Long id;
-    private Long studentId;
+//    private Long studentId;
     private String studentNo;
     private String studentName;
-    private Long subjectId;
+//    private Long subjectId;
+    private String subjectNo;
     private String subjectName;
-    private Long examId;
+//    private Long examId;
     private String examNo;
     private String examName;
     private Double examScore;
     private Date examDate;
-    private Long classesId;
+//    private Long classesId;
     private String classesNo;
     private String classesName;
+
+    private String examDateStr;
 
     public Long getId() {
         return id;
@@ -26,13 +29,7 @@ public class ExamScoreEntity {
         this.id = id;
     }
 
-    public Long getStudentId() {
-        return studentId;
-    }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
 
     public String getStudentNo() {
         return studentNo;
@@ -50,13 +47,6 @@ public class ExamScoreEntity {
         this.studentName = studentName;
     }
 
-    public Long getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
-    }
 
     public String getSubjectName() {
         return subjectName;
@@ -66,13 +56,6 @@ public class ExamScoreEntity {
         this.subjectName = subjectName;
     }
 
-    public Long getExamId() {
-        return examId;
-    }
-
-    public void setExamId(Long examId) {
-        this.examId = examId;
-    }
 
     public String getExamNo() {
         return examNo;
@@ -106,13 +89,6 @@ public class ExamScoreEntity {
         this.examDate = examDate;
     }
 
-    public Long getClassesId() {
-        return classesId;
-    }
-
-    public void setClassesId(Long classesId) {
-        this.classesId = classesId;
-    }
 
     public String getClassesNo() {
         return classesNo;
@@ -128,5 +104,21 @@ public class ExamScoreEntity {
 
     public void setClassesName(String classesName) {
         this.classesName = classesName;
+    }
+
+    public String getSubjectNo() {
+        return subjectNo;
+    }
+
+    public void setSubjectNo(String subjectNo) {
+        this.subjectNo = subjectNo;
+    }
+
+    public String getExamDateStr() {
+        return examDateStr;
+    }
+
+    public void setExamDateStr(String examDateStr) {
+        this.examDateStr = examDateStr;
     }
 }
