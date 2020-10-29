@@ -8,7 +8,7 @@ public class PermissionUtil {
     public static Permission toPermissions(PermissionEntity permissionEntity) {
         Permission permissions = new Permission();
         if (permissionEntity != null) {
-            BeanUtils.copyProperties(permissionEntity, permissionEntity);
+            BeanUtils.copyProperties(permissionEntity, permissions);
         }
         return permissions;
     }

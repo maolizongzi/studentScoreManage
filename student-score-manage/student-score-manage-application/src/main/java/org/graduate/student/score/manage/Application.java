@@ -62,17 +62,16 @@ public class Application {
     public void initPermission() {
         File menuPermissionFile = new File(menuPermissionLocation);
         BufferedReader reader = null;
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
         try {
             reader = new BufferedReader(new FileReader(menuPermissionFile));
             String tempStr;
             while ((tempStr = reader.readLine()) != null) {
-                stringBuffer.append(tempStr);
+                stringBuilder.append(tempStr);
             }
             reader.close();
             Gson gson = new Gson();
-            Map<?, ?> json = gson.fromJson(stringBuffer.toString(), Map.class);
-            System.out.println(stringBuffer);
+            Map<?, ?> json = gson.fromJson(stringBuilder.toString(), Map.class);
             List<?> menuItemData = (List<?>) json.get("menu-item-data");
             List<Map<String, String>> allPermissions = new ArrayList<>();
             menuItemData.forEach(o -> {
@@ -81,6 +80,7 @@ public class Application {
                 allPermissions.addAll(itemPermissions);
             });
             System.out.println(allPermissions);
+            savePermission(allPermissions);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -95,25 +95,39 @@ public class Application {
 
     }
 
+    private void savePermission(List<Map<String, String>> allPermissions) {
+        allPermissions.forEach(o -> {
+            PermissionEntity permissionEntity = new PermissionEntity();
+            permissionEntity.setName(o.get("name"));
+            permissionEntity.setPermission(o.get("permission"));
+            try {
+                permissionService.save(permissionEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     private List<Map<String, String>> getPermissions(Map<?, ?> menuItem) {
         List<Map<String, String>> permissions = new ArrayList<>();
-        Map<String, String> allPermission = new HashMap<>();
         Map<?, ?> permission = (Map<?, ?>) menuItem.get("permissions");
         String menuPermission = (String) permission.get("menu");
-        allPermission.put("name", "menu");
-        allPermission.put("permission", menuPermission);
+        Map<String, String> menuPermissionMap = new HashMap<>();
+        menuPermissionMap.put("name", "menu");
+        menuPermissionMap.put("permission", menuPermission);
+        permissions.add(menuPermissionMap);
         List<?> operations = (List<?>) permission.get("operation");
         if (operations != null) {
             operations.forEach(o -> {
                 Map<?, ?> operationPermissions = (Map<?, ?>) o;
                 String operationName = (String) operationPermissions.get("name");
                 String operationPermission = (String) operationPermissions.get("permission");
-//                allPermission.put(operationName, operationPermission);
-                allPermission.put("name", operationName);
-                allPermission.put("permission", operationPermission);
+                Map<String, String> operationMap = new HashMap<>();
+                operationMap.put("name", operationName);
+                operationMap.put("permission", operationPermission);
+                permissions.add(operationMap);
             });
         }
-        permissions.add(allPermission);
         List<?> childMenu = (List<?>) menuItem.get("child");
         if (childMenu != null) {
             childMenu.forEach(o -> {
@@ -123,16 +137,5 @@ public class Application {
             });
         }
         return permissions;
-    }
-
-    private void savePermission(List<Map<String, String>> permissions) {
-        System.out.println(permissionService);
-        permissions.forEach(o -> {
-            PermissionEntity permissionEntity = new PermissionEntity();
-            permissionEntity.setName(o.get("name"));
-            permissionEntity.setName(o.get("permission"));
-            permissionService.save(permissionEntity);
-        });
-
     }
 }

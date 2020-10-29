@@ -1,12 +1,12 @@
 (function () {
     'use strict';
-    var serverUrl = '';
+    var server_url = '';
     $.when($.ajax({
         type: 'get',
         url: '/config/config.json',
         dataType: 'json',
         success: function (result) {
-            serverUrl = result['server-url'];
+            server_url = result['server-url'];
         }
     })).done(function () {
         $.ajax({
@@ -14,12 +14,39 @@
             url: '/config/menu.json',
             dataType: 'json',
             success: function (menu_content) {
+                $('#save-role-permission').on('click', function () { save_role_permission(server_url); });
+                build_role_select(server_url)
                 build_permission_menu($('#menu-permission'), menu_content['menu-item-data']);
             }
         });
     }
     );
 }());
+
+function build_role_select(server_url) {
+    $('#role-select').html('');
+    $.ajax({
+        url: server_url + '/role/query',
+        type: 'get',
+        contentType: 'application/json',
+        data: { 'pageSize': 100, 'currentPage': 1 },
+        success: function (result) {
+            let code = result['code'];
+            let data = result['data'];
+            if (code === '00') {
+                $.each(data, function (index, obj) {
+                    let role_option = $('<option></option>');
+                    role_option.text(obj['name']);
+                    role_option.val(obj['id']);
+                    $('#role-select').append(role_option);
+                });
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
 
 function build_permission_menu(item, menu_content) {
     $.each(menu_content, function (index, menu_item) {
@@ -55,7 +82,6 @@ function build_permission_menu(item, menu_content) {
 
         let operation_permissions = menu_permissions['operation'];
         $.each(operation_permissions, function (index, operation_permission) {
-            console.log(operation_permission);
             let operation_permission_li = build_permission_li(operation_permission);
             child_ul.append(operation_permission_li);
         });
@@ -69,7 +95,6 @@ function build_permission_menu(item, menu_content) {
 
 
 function build_permission_li(operation_permission) {
-    debugger;
     let menu_item_div = $('<div class=\'nav-link form-check form-check-inline\'></div>');
     let checkbox_id = 'box' + window.performance.now();
     let permission_checkbox = $('<input />');
@@ -83,4 +108,28 @@ function build_permission_li(operation_permission) {
     menu_li.append(menu_item_div);
     return menu_li;
 
+}
+
+function save_role_permission(server_url) {
+    let role_id = $('#role-select').val();
+    let permission_input_arr = $('#menu-permission :checked');
+    let permissions = [];
+    $.each(permission_input_arr, function (index, obj) {
+        permissions.push($(obj).val());
+    });
+    let role_permission = {};
+    role_permission['roleId'] = role_id;
+    role_permission['permissions'] = permissions;
+    $.ajax({
+        url: server_url + '/role/permission/add',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(role_permission),
+        success: function (result) {
+            var code = result['code'];
+            var data = result['data'];
+            if (code === '00') {
+            }
+        }
+    });
 }

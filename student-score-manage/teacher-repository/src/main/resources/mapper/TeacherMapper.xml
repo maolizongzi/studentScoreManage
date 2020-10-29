@@ -12,6 +12,7 @@
         <result property="admissionDate" column="admission_date"/>
         <result property="resignDate" column="resign_date"/>
         <result property="status" column="status"/>
+        <result property="roleId" column="role_id" />
     </resultMap>
 
     <insert id="save" parameterType="org.graduate.teacher.repository.model.Teacher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
@@ -24,6 +25,7 @@
             <if test="admissionDate != null">admission_date,</if>
             <if test="resignDate != null">resign_date,</if>
             <if test="status != null">status,</if>
+            <if test="roleId != null">role_id,</if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="no != null">#{no},</if>
@@ -34,6 +36,7 @@
             <if test="admissionDate != null">#{admissionDate},</if>
             <if test="resignDate != null">#{resignDate},</if>
             <if test="status != null">#{status},</if>
+            <if test="roleId != null">#{roleId},</if>
         </trim>
     </insert>
 
@@ -48,11 +51,12 @@
             <if test="admissionDate != null">admission_date = #{admissionDate},</if>
             <if test="resignDate != null">resign_date = #{resignDate},</if>
             <if test="status != null">status = #{status},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
         </set>
         WHERE id = #{id}
     </update>
 
-    <select id="queryByNo" resultType="org.graduate.teacher.repository.model.Teacher">
+    <select id="queryByNo" resultMap="baseResultMap">
         SELECT * FROM ssm_teacher WHERE no = #{no}
     </select>
 
@@ -67,6 +71,7 @@
             <if test="admissionDate != null">AND admission_date = #{admissionDate}</if>
             <if test="resignDate != null">AND resign_date = #{resignDate}</if>
             <if test="status != null">AND status = #{status}</if>
+            <if test="roleId != null">AND role_id = #{roleId}</if>
         </where>
         LIMIT #{startIndex}, #{pageSize}
     </select>
@@ -82,6 +87,7 @@
             <if test="admissionDate != null">AND admission_date = #{admissionDate}</if>
             <if test="resignDate != null">AND resign_date = #{resignDate}</if>
             <if test="status != null">AND status = #{status}</if>
+            <if test="roleId != null">AND role_id = #{roleId}</if>
         </where>
     </select>
 

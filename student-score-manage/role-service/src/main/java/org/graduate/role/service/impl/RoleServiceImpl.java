@@ -45,7 +45,7 @@ public class RoleServiceImpl implements RoleService {
         roles.forEach(o -> roleEntities.add(RoleUtil.toRoleEntity(o)));
         Integer count = roleDao.queryCount(roleQueryParam);
         QueryResultEntity<List<RoleEntity>> queryResultEntity = new QueryResultEntity<>(roleQueryParam.getPageSize(), count);
-        queryResultEntity.setResult("00");
+        queryResultEntity.setCode("00");
         queryResultEntity.setResult("success");
         queryResultEntity.setData(roleEntities);
         return queryResultEntity;

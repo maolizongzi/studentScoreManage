@@ -5,17 +5,20 @@
     <resultMap id="baseResultMap" type="org.graduate.role.repository.model.RolePermission">
         <id property="id" column="id"/>
         <result property="roleId" column="role_id"/>
-        <result property="permissionsId" column="permissions_id"/>
+        <result property="permissionId" column="permissions_id"/>
+        <result property="permissionName" column="permissions_name"/>
+        <result property="permission" column="permission"/>
+
     </resultMap>
 
     <insert id="save" parameterType="org.graduate.role.repository.model.RolePermission" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <trim prefix="INSERT INTO ssm_role_permissions (" suffix=")" suffixOverrides=",">
             <if test="roleId != null">role_id,</if>
-            <if test="permissionsId">permissions_id,</if>
+            <if test="permissionId">permissions_id,</if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="roleId != null">#{roleId},</if>
-            <if test="permissionsId != null">#{permissionsId},</if>
+            <if test="permissionId != null">#{permissionId},</if>
         </trim>
     </insert>
 
@@ -23,26 +26,40 @@
         UPDATE ssm_role_permissions
         <set>
             <if test="roleId != null">role_id = #{roleId},</if>
-            <if test="permissionsId != null">permissions_id = #{permissionsId},</if>
+            <if test="permissionId != null">permissions_id = #{permissionId},</if>
         </set>
     </update>
 
     <select id="query" parameterType="org.graduate.role.repository.model.RolePermissionQueryParam" resultMap="baseResultMap">
-        SELECT * FROM ssm_role_permissions
+        SELECT
+            srp.id,
+            srp.role_id,
+            srp.permissions_id,
+            sp.name permissions_name,
+            sp.permission permission
+        FROM
+            ssm_role_permissions srp
+                INNER JOIN
+            ssm_permissions sp ON srp.permissions_id = sp.id
         <where>
             <if test="id != null">AND id = #{id}</if>
             <if test="roleId != null">AND role_id = #{roleId}</if>
-            <if test="permissionsId != null">AND permissions_id = #{permissionsId}</if>
+            <if test="permissionId != null">AND permissions_id = #{permissionId}</if>
         </where>
         LIMIT #{startIndex}, #{pageSize}
     </select>
 
     <select id="queryCount" parameterType="org.graduate.role.repository.model.RolePermissionQueryParam" resultType="java.lang.Integer">
-        SELECT * FROM ssm_role_permissions
+        SELECT
+            COUNT(*)
+        FROM
+            ssm_role_permissions srp
+        INNER JOIN
+            ssm_permissions sp ON srp.permissions_id = sp.id
         <where>
             <if test="id != null">AND id = #{id}</if>
             <if test="roleId != null">AND role_id = #{roleId}</if>
-            <if test="permissionsId != null">AND permissions_id = #{permissionsId}</if>
+            <if test="permissionId != null">AND permission_id = #{permissionId}</if>
         </where>
     </select>
 </mapper>

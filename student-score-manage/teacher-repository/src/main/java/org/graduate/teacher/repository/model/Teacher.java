@@ -12,6 +12,15 @@ public class Teacher {
     private Date admissionDate;
     private Date resignDate;
     private Integer status;
+    private Long roleId;
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
     public Long getId() {
         return id;

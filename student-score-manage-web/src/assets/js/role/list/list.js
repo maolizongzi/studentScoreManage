@@ -7,7 +7,8 @@
     })).done(function () {
         $('#add-role').on('click', function () { to_add_role(); });
         $('#save-role').on('click', function () { save_role(server_url); });
-        $('#cancel-role').on('click', function () { clear_role() });
+        $('#cancel-role').on('click', function () { clear_role_modal() });
+        build_role_table(server_url, 1);
     });
 }());
 
@@ -35,6 +36,7 @@ function build_role_table(server_url, current_page) {
                     option_td.append(edit_button);
                     tr.append(role_no_td);
                     tr.append(role_name_td);
+                    tr.append(edit_button);
                     $('#table-content').append(tr);
                 });
                 build_role_table_pagination(current_page, result['totalPage'], server_url);
@@ -46,7 +48,7 @@ function build_role_table(server_url, current_page) {
     });
 }
 
-function clear_role() {
+function clear_role_modal() {
     $('#id').val('');
     $('#no').val('');
     $('#name').val('');
@@ -54,8 +56,8 @@ function clear_role() {
 
 }
 
-function to_edit_role(server_url) {
-    clear_role();
+function to_edit_role(server_url, id) {
+    clear_role_modal();
     $.ajax({
         url: server_url + '/role/query',
         type: 'get',
@@ -80,15 +82,22 @@ function to_edit_role(server_url) {
 }
 
 function to_add_role(server_url) {
-    clear_role();
+    clear_role_modal();
     $('#edit-role-modal').modal('show');
 
 }
 
 function save_role(server_url) {
+    var api_url = server_url + '/role/add';
+    if ($('#action').val() === 'edit') {
+        api_url = server_url + '/role/update';
+    }
+
+
     let name = $('#name').val();
     let id = $('#id').val();
     let no = $('#no').val();
+
     let data = { 'name': name, 'id': id, 'no': no };
     $.ajax({
         url: api_url,

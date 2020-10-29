@@ -1,6 +1,7 @@
 package org.graduate.teacher.service.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class TeacherEntity {
     private Long id;
@@ -12,6 +13,24 @@ public class TeacherEntity {
     private Date admissionDate;
     private Date resignDate;
     private Integer status;
+    private Long roleId;
+    private List<String> permissions;
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
     public Long getId() {
         return id;

@@ -11,6 +11,10 @@
 <!--            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
 <!--        </encoder>-->
 <!--    </appender>-->
+    <logger name="java.sql.Connection" level="STDOUT" />
+    <logger name="java.sql.PreparedStatement" level="STDOUT" />
+    <logger name="org.graduate" level="STDOUT" />
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
 <!--        <appender-ref ref="FILE"/>-->

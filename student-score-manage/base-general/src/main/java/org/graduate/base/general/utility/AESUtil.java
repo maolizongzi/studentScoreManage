@@ -23,7 +23,6 @@ public class AESUtil {
         cipher.init(Cipher.DECRYPT_MODE, getSecretKeySpec(key));// 初始化解密器
         byte[] srcByte = Base64.getDecoder().decode(src);
         byte[] decrypted = cipher.doFinal(srcByte);
-        System.out.println("原文：" + new String(decrypted));
         return new String(decrypted);
     }
 
