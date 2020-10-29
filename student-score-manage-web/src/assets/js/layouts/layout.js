@@ -34,7 +34,7 @@ function build_sidebar_menu(item, menu_content, permissions) {
     $.each(menu_content, function (index, menu_item) {
         let menu_permission = menu_item['permissions']['menu'];
         if (!permission_exists(menu_permission, permissions)) {
-            // return true;
+            return true;
         }
         let menu_link = $('<a class=\'nav-link\'></a>');
         menu_link.text(menu_item['name']);
