@@ -28,10 +28,17 @@ function build_subject_table(server_url, current_page) {
                     subject_no_td.text(obj['no']);
                     let subject_name_td = $("<td></td>");
                     subject_name_td.text(obj['name']);
-                    let edit_button = $('<button class=\'btn btn-outline-primary btn-sm\'>操作</button>');
+                    let edit_button = $('<button class=\'btn btn-outline-primary btn-sm\'>编辑</button>');
                     edit_button.on('click', function () { to_edit_modal(server_url, obj['id']) });
                     let operation_td = $('<td></td>');
                     operation_td.append(edit_button);
+                    operation_td.append('&nbsp;&nbsp;&nbsp;&nbsp;');   
+
+                    let delete_button = $('<button class=\'btn btn-outline-primary btn-sm\'>删除</button>');
+                    delete_button.on('click', function () { to_delete_modal(server_url, obj['id']) });
+                    let operationDelte_td = $('<td></td>');
+                    operation_td.append(delete_button);
+
 
                     let tr = $("<tr></tr>");
                     tr.append(subject_no_td);
@@ -78,6 +85,30 @@ function to_add_modal() {
     $('#edit-subject-modal').modal({ 'show': true });
 }
 
+function to_delete_modal(server_url, id) {
+    if(confirm("确实要删除吗？")){
+        $.ajax({
+            url: server_url + '/subject/delete',
+            type: 'get',
+            contentType: 'application/json',
+            data: { 'id': id},
+            success: function (result) {
+                var code = result['code'];
+                var data = result['data'];
+                if (code === '00') {
+                    alert("已经删除！");
+                    build_subject_table(server_url, 1);
+                }
+            },
+            error: function (err) {
+                alert("删除失败！");
+                console.log(err);
+            }
+        });
+    }else {
+        alert("已经取消了删除操作");
+    }
+}
 function to_edit_modal(server_url, id) {
     clear_subject_modal();
     $.ajax({
@@ -107,6 +138,7 @@ function clear_subject_modal() {
 }
 
 function build_subject_table_pagination(current_page, total_page, server_url) {
+    debugger;
     $('#subject-pagination').html('');
     let page_interval = 2;
     let start_index = current_page - page_interval;

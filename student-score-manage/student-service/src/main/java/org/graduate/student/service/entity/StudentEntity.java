@@ -16,7 +16,7 @@ public class StudentEntity implements Serializable {
     private Date admissionDate;
     private Date graduationDate;
     private Integer status;
-    private Long classesId;
+    private String classesNo;
 
     public Long getId() {
         return id;
@@ -106,11 +106,11 @@ public class StudentEntity implements Serializable {
         this.status = status;
     }
 
-    public Long getClassesId() {
-        return classesId;
+    public String getClassesNo() {
+        return classesNo;
     }
 
-    public void setClassesId(Long classesId) {
-        this.classesId = classesId;
+    public void setClassesNo(String classesNo) {
+        this.classesNo = classesNo;
     }
 }

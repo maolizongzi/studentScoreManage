@@ -13,4 +13,7 @@ public interface SubjectService {
     QueryResultEntity<List<SubjectEntity>> query(SubjectQueryParam subjectQueryParam);
 
     SubjectEntity updateSubject(SubjectEntity subjectEntity);
+
+    void deleteSubject(Long id);
+
 }

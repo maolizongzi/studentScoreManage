@@ -8,6 +8,9 @@ public class BaseQueryParam {
         this.startIndex = (currentPage - 1) * pageSize;
     }
 
+    public BaseQueryParam() {
+    }
+
     private Integer pageSize;
     private Integer currentPage;
     private Integer startIndex;

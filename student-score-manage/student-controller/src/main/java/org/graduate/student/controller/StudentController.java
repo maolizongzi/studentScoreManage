@@ -71,7 +71,7 @@ public class StudentController {
             @RequestParam(value = "admissionDate", required = false) Date admissionDate,
             @RequestParam(value = "graduationDate", required = false) Date graduationDate,
             @RequestParam(value = "status", required = false) Integer status,
-            @RequestParam(value = "classesId", required = false) Long classesId
+            @RequestParam(value = "classesNo", required = false) String classesNo
     ) {
         StudentQueryParam studentQueryParam = new StudentQueryParam(currentPage, pageSize);
         studentQueryParam.setId(id);
@@ -85,7 +85,7 @@ public class StudentController {
         studentQueryParam.setAdmissionDate(admissionDate);
         studentQueryParam.setGraduationDate(graduationDate);
         studentQueryParam.setStatus(status);
-        studentQueryParam.setClassesId(classesId);
+        studentQueryParam.setClassesNo(classesNo);
         return studentService.query(studentQueryParam);
     }
 }

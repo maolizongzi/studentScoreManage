@@ -15,4 +15,8 @@ public interface SubjectDao {
     Integer queryCount(SubjectQueryParam subjectQueryParam);
 
     void update(Subject subject);
+
+    void delete(Long id);
+
+
 }

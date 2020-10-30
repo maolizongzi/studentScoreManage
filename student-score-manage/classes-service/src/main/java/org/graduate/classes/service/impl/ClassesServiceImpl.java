@@ -26,7 +26,12 @@ public class ClassesServiceImpl implements ClassesService {
     @Override
     public ClassesEntity addClasses(ClassesEntity classesEntity) {
         Classes classes = ClassesUtil.toClasses(classesEntity);
-        classes.setNo(UUID.randomUUID().toString());
+        String afterName=classes.getName().substring(0,4);
+        QueryClassesParam param=new QueryClassesParam(1,1);
+        param.setNameGrade(afterName);
+        param.setGrade(classes.getGrade());
+        Integer classesCount= classesDao.queryCount(param);
+        classes.setNo(buildStudentNo(afterName,classesCount==0?1:classesCount+1));
         classesDao.save(classes);
         return ClassesUtil.toClassesEntity(classes);
     }
@@ -52,6 +57,8 @@ public class ClassesServiceImpl implements ClassesService {
         queryResultEntity.setResult("success");
         return queryResultEntity;
     }
-
+    private static String buildStudentNo( String name,Integer id) {
+        return name+String.format("%03d", id);
+    }
 
 }

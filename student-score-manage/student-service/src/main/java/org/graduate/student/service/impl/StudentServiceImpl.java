@@ -26,6 +26,7 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentDao studentDao;
+
     @Value("${graduate.password.key}")
     private String passwordKey;
 
@@ -43,7 +44,12 @@ public class StudentServiceImpl implements StudentService {
             e.printStackTrace();
         }
         studentDao.save(student);
-        student.setNo(buildStudentNo(student.getAdmissionDate(), student.getId(), student.getClassesId()));
+        //查询当前届学生count，count+1进行学生编号
+        StudentQueryParam q=new StudentQueryParam();
+        q.setClassesNo(student.getClassesNo());
+        Integer studentCount= studentDao.queryCount(q);
+
+        student.setNo(buildStudentNo(student.getAdmissionDate(),  studentCount, student.getClassesNo()));
         studentDao.update(student);
         return StudentUtil.toStudentEntity(student);
     }
@@ -57,6 +63,12 @@ public class StudentServiceImpl implements StudentService {
             } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
                 e.printStackTrace();
             }
+        }else {
+            StudentQueryParam param=new StudentQueryParam(1,1);
+            param.setClassesNo(student.getClassesNo());
+            param.setNo(student.getNo());
+            List<Student>  studentList= studentDao.query(param);
+            student.setPassword(studentList.get(0).getPassword());
         }
         studentDao.update(student);
         return StudentUtil.toStudentEntity(student);
@@ -76,10 +88,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    private String buildStudentNo(Date admissionDate, Long id, Long classesId) {
+    private static String buildStudentNo(Date admissionDate, Integer id, String classesNo) {
+        String temp=classesNo.substring(4);
         return "S" +
-                new SimpleDateFormat("yyyyMMdd").format(admissionDate) +
-                String.format("%02d", classesId) +
+                new SimpleDateFormat("yyyy0901").format(admissionDate) +
+                temp +
                 String.format("%03d", id);
     }
 }

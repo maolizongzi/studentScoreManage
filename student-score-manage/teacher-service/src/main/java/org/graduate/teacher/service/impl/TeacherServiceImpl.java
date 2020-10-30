@@ -50,7 +50,9 @@ public class TeacherServiceImpl implements TeacherService {
             e.printStackTrace();
         }
         teacherDao.save(teacher);
-        teacher.setNo(buildTeacherNo(teacher.getId(), teacher.getAdmissionDate()));
+        TeacherQueryParam param = new TeacherQueryParam(1, 1);
+        Integer teacherCount = teacherDao.queryCount(param);
+        teacher.setNo(buildTeacherNo(teacherCount, teacher.getAdmissionDate()));
         teacherDao.update(teacher);
         return TeacherUtil.toTeacherEntity(teacher);
     }
@@ -64,6 +66,12 @@ public class TeacherServiceImpl implements TeacherService {
             } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
                 e.printStackTrace();
             }
+        } else {
+            //
+            TeacherQueryParam param = new TeacherQueryParam(1, 1);
+            param.setNo(teacher.getNo());
+            List<Teacher> teacherList = teacherDao.query(param);
+            teacher.setPassword(teacherList.get(0).getPassword());
         }
         teacherDao.update(teacher);
         return TeacherUtil.toTeacherEntity(teacher);
@@ -95,10 +103,8 @@ public class TeacherServiceImpl implements TeacherService {
     public QueryResultEntity<List<TeacherEntity>> query(TeacherQueryParam teacherQueryParam) {
         List<Teacher> teachers = teacherDao.query(teacherQueryParam);
         Integer count = teacherDao.queryCount(teacherQueryParam);
-
         List<TeacherEntity> teacherEntities = new ArrayList<>();
         teachers.forEach(o -> teacherEntities.add(TeacherUtil.toTeacherEntity(o)));
-
         QueryResultEntity<List<TeacherEntity>> queryResultEntity = new QueryResultEntity<>(teacherQueryParam.getPageSize(), count);
         queryResultEntity.setData(teacherEntities);
         queryResultEntity.setCode("00");
@@ -107,11 +113,11 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
 
-    private String buildTeacherNo(Long id, Date admissionDate) {
+    private String buildTeacherNo(Integer id, Date admissionDate) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
 
         return "T" +
                 simpleDateFormat.format(admissionDate) +
-                id;
+                String.format("%03d", id);
     }
 }

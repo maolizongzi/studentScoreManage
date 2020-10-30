@@ -36,7 +36,21 @@ public class SubjectController {
         }
         return baseResultEntity;
     }
-
+    @GetMapping("delete")
+    public BaseResultEntity<SubjectEntity> deleteSubject(
+            @RequestParam(value = "id", required = false) Long id){
+        BaseResultEntity<SubjectEntity> baseResultEntity = new BaseResultEntity<>();
+        baseResultEntity.setCode("01");
+        baseResultEntity.setResult("fail");
+        try {
+            subjectService.deleteSubject(id);
+            baseResultEntity.setCode("00");
+            baseResultEntity.setResult("success");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return baseResultEntity;
+    }
     @PostMapping("update")
     public BaseResultEntity<SubjectEntity> updateSubject(@RequestBody SubjectEntity subjectEntity) {
         BaseResultEntity<SubjectEntity> baseResultEntity = new BaseResultEntity<>();
