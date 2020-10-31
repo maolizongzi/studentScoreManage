@@ -145,24 +145,40 @@
         },
         {
             "name": "成绩管理",
-            "path": "/src/pages/examScore/list/list.html",
+            "path": "",
             "icon": "align-justify",
             "permissions": {
-                "menu": "examScore"
+            "menu": "examScore"
             },
             "child": [
-                {
-                    "name": "成绩列表",
-                    "path": "/src/pages/examScore/list/list.html",
-                    "icon": "align-justify",
-                    "authority": ""
+               {
+                "name": "成绩列表",
+                "path": "/src/pages/examScore/list/list.html",
+                "icon": "align-justify",
+                "permissions": {
+                     "menu": "pie",
+                    "operation": [
+                            {
+                            "name": "列表",
+                            "permission": "pie-list"
+                            }
+                      ]
+                   }
                 },
-                {
-                    "name": "年级成绩图形化展示",
-                    "path": "/src/pages/examScore/list/lineChart.html",
-                    "icon": "align-justify",
-                    "authority": ""
-                }
+              {
+                "name": "年级成绩图形化展示",
+                "path": "/src/pages/examScore/list/lineChart.html",
+                "icon": "align-justify",
+                "permissions": {
+                    "menu": "line",
+                    "operation": [
+                        {
+                        "name": "列表",
+                        "permission": "line-list"
+                        }
+                      ]
+                  }
+              }
             ]
         }
     ]
