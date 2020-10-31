@@ -9,6 +9,9 @@ public class QueryResultEntity<T> extends BaseResultEntity<T> {
     public QueryResultEntity(Integer pageSize, Integer queryResultCount) {
         this.pageSize = pageSize;
         this.queryResultCount = queryResultCount;
+        if (queryResultCount == null) {
+            queryResultCount = 0;
+        }
         this.totalPage = (queryResultCount + pageSize - 1) / pageSize;
     }
 

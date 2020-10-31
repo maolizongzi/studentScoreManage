@@ -2,6 +2,9 @@ package org.graduate.teacher.controller;
 
 import org.graduate.base.general.entity.BaseResultEntity;
 import org.graduate.base.general.entity.QueryResultEntity;
+import org.graduate.role.repository.model.RolePermissionQueryParam;
+import org.graduate.role.service.RolePermissionService;
+import org.graduate.role.service.entity.RolePermissionEntity;
 import org.graduate.teacher.repository.model.TeacherQueryParam;
 import org.graduate.teacher.service.TeacherService;
 import org.graduate.teacher.service.entity.TeacherEntity;
@@ -9,25 +12,35 @@ import org.graduate.teacher.service.entity.TeacherLoginEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @RequestMapping("teacher")
 public class TeacherController {
 
     private final TeacherService teacherService;
+    private final RolePermissionService rolePermissionService;
 
     @Autowired
-    public TeacherController(TeacherService teacherService) {
+    public TeacherController(TeacherService teacherService, RolePermissionService rolePermissionService) {
         this.teacherService = teacherService;
+        this.rolePermissionService = rolePermissionService;
     }
 
     @PostMapping("login")
     public TeacherLoginEntity login(@RequestBody TeacherEntity teacherEntity) {
-        return teacherService.loginByTeacherNo(teacherEntity.getNo(), teacherEntity.getPassword());
+        TeacherLoginEntity teacherLoginEntity = teacherService.loginByTeacherNo(teacherEntity.getNo(), teacherEntity.getPassword());
+        if (teacherLoginEntity.getCode().equals("00")) {
+            RolePermissionQueryParam entity = new RolePermissionQueryParam(1, 100);
+            entity.setRoleId(teacherLoginEntity.getData().getRoleId());
+            QueryResultEntity<List<RolePermissionEntity>> rolePermissionQueryResultEntity = rolePermissionService.query(entity);
+            List<String> permissions = new ArrayList<>();
+            rolePermissionQueryResultEntity.getData().forEach(o -> permissions.add(o.getPermission()));
+            teacherLoginEntity.getData().setPermissions(permissions);
+        }
+        return teacherLoginEntity;
     }
 
     @PostMapping("register")

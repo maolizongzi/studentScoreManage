@@ -1,21 +1,23 @@
 (function () {
     'use strict';
-    var serverUrl = '';
+    var server_url = '';
     // var menu = [{}];
     $.when($.ajax({
         type: 'get',
         url: '/config/config.json',
         dataType: 'json',
         success: function (result) {
-            serverUrl = result['server-url'];
+            server_url = result['server-url'];
         }
     })).done(function () {
+        $('#sign-out').on('click', function () { sign_out(); });
         $.ajax({
             type: 'get',
             url: '/config/menu.json',
             dataType: 'json',
             success: function (menu_content) {
-                build_sidebar_menu($('#sidebar-menu'), menu_content['menu-item-data']);
+                let permissions = localStorage.getItem('permissions');
+                build_sidebar_menu($('#sidebar-menu'), menu_content['menu-item-data'], permissions);
                 feather.replace();
             }
         });
@@ -23,8 +25,17 @@
     );
 }());
 
-function build_sidebar_menu(item, menu_content) {
+function sign_out() {
+    localStorage.clear();
+    location.href = '/src/pages/teacher/login/login.html';
+}
+
+function build_sidebar_menu(item, menu_content, permissions) {
     $.each(menu_content, function (index, menu_item) {
+        let menu_permission = menu_item['permissions']['menu'];
+        if (!permission_exists(menu_permission, permissions)) {
+            return true;
+        }
         let menu_link = $('<a class=\'nav-link\'></a>');
         menu_link.text(menu_item['name']);
         if (!menu_item['child'] && menu_item['path'] != '') {
@@ -43,7 +54,7 @@ function build_sidebar_menu(item, menu_content) {
         menu_li.append(menu_link);
         item.append(menu_li);
         if (menu_item['child']) {
-            let timestamp = Date.parse(new Date());
+            let timestamp = new Date().getTime();
             let child_id = 'child' + timestamp;
             menu_link.attr({
                 'href': '#' + child_id,
@@ -57,7 +68,7 @@ function build_sidebar_menu(item, menu_content) {
                 class: 'collapse list-unstyled',
                 style: 'padding-left: 20px'
             });
-            build_sidebar_menu(child_ul, menu_item['child']);
+            build_sidebar_menu(child_ul, menu_item['child'], permissions);
             menu_li.append(child_ul);
         }
 
@@ -91,3 +102,17 @@ function build_sidebar_menu_bak() {
     });
 }
 
+
+
+function permission_exists(permission, permissions) {
+    let flag = false;
+    if (permissions) {
+        $.each(permissions.split(','), function (index, obj) {
+            if (obj === permission) {
+                flag = true;
+                return false;
+            }
+        });
+    }
+    return flag;
+}

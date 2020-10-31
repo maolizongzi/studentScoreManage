@@ -28,6 +28,7 @@
         <module>role-service</module>
         <module>role-repository</module>
         <module>base-general</module>
+        <module>role-controller</module>
     </modules>
 
 

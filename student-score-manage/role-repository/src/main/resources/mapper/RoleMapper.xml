@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.graduate.role.repository.dao.RoleDao">
-    <insert id="save" parameterType="org.graduate.role.repository.model.Role">
-        <trim prefix="INSERT INTO ssm_permissions (" suffix=")" suffixOverrides=",">
+
+    <resultMap id="baseResultMap" type="org.graduate.role.repository.model.Role">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <insert id="save" parameterType="org.graduate.role.repository.model.Role" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        <trim prefix="INSERT INTO ssm_role (" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
         </trim>
     </insert>
+
+    <update id="update" parameterType="org.graduate.role.repository.model.Role">
+        UPDATE ssm_role
+        <set>
+            <if test="name != null">name = #{name}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="query" parameterType="org.graduate.role.repository.model.RoleQueryParam" resultMap="baseResultMap">
+        SELECT * FROM ssm_role
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="name != null">AND name = #{name}</if>
+        </where>
+        LIMIT #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="queryCount" parameterType="org.graduate.role.repository.model.RoleQueryParam" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM ssm_role
+        <where>
+            <if test="id != null">AND id = #{id}</if>
+            <if test="name != null">AND name = #{name}</if>
+        </where>
+    </select>
+
 </mapper>

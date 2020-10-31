@@ -6,11 +6,38 @@
         $('#admission-date').datepicker({ language: 'zh-CN' });
         $('#resign-date').datepicker({ language: 'zh-CN' });
         build_teacher_table(server_url, 1);
+        build_role_select(server_url);
         $('#register-teacher').on('click', function () { to_register_taecher(); });
         $('#cancel-teacher').on('click', function () { clear_teacher(); });
         $('#save-teacher').on('click', function () { save_teacher(server_url) });
+
     });
 }());
+
+function build_role_select(server_url) {
+    $('#role-select').html('');
+    $.ajax({
+        url: server_url + '/role/query',
+        type: 'get',
+        contentType: 'application/json',
+        data: { 'pageSize': 100, 'currentPage': 1 },
+        success: function (result) {
+            let code = result['code'];
+            let data = result['data'];
+            if (code === '00') {
+                $.each(data, function (index, obj) {
+                    let role_option = $('<option></option>');
+                    role_option.text(obj['name']);
+                    role_option.val(obj['id']);
+                    $('#role-select').append(role_option);
+                });
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
 
 function build_teacher_table(server_url, current_page) {
     $('#table-content').html('');
@@ -113,9 +140,10 @@ function save_teacher(server_url) {
     });
     let gender = $('#gender').val();
     let status = $('#status').val();
+    let role_id = $('#role-select').val();
     data['gender'] = gender;
     data['status'] = status;
-    console.log(data);
+    data['roleId'] = role_id;
     let api_url = server_url + '/teacher/register';
     if ($('#action').val() === 'update') {
         api_url = server_url + '/teacher/update';
@@ -162,6 +190,7 @@ function to_edit_teacher(server_url, teacher_no) {
                 $('#telephone').val(teacher['telephone']);
                 $('#gender').val(teacher['gender']);
                 $('#status').val(teacher['status']);
+                $('#role-select').val(teacher['roleId']);
                 $('#action').val('update');
                 $('#edit-teacher-modal').modal({ 'show': true });
             }
